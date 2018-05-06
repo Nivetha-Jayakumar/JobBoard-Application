@@ -226,7 +226,7 @@ class Dashboard extends Component {
               </div>
             </div>
 
-            <div className="col-xs-12 panel panel-default col-md-6 profile-views gap">
+            <div className="col-xs-12 panel panel-default col-md-6 pull-right profile-views gap">
               <div className="panel-heading text-center">Profile views</div>
               <div className="panel-body text-center">To be added</div>
             </div>

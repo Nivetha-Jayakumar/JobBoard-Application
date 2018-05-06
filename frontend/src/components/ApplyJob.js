@@ -136,8 +136,8 @@ class ApplyJob extends Component {
 
   renderApplyForm() {
     return (
-      <div className="col-md-8 col-md-offset-2 text-justify apply-form">
-        <br />
+      <div className="col-md-8 col-md-offset-2 panel panel-body text-justify apply-form">
+        <br /><br />
         {this.state.message ?
           <div className="text-justify alert alert-success">
             <i className="fa fa-check" /> {this.state.message}
@@ -146,7 +146,7 @@ class ApplyJob extends Component {
 
         <form className="form-horizontal" id="application-form" onSubmit={this.handleApplication}>
           <div className="form-group">
-            <label className="col-sm-4 control-label">Add your resume: </label>
+            <label className="col-sm-4 control-label">Attach your resume: </label>
             <div className="col-sm-7">
               <input
                 type="file"
@@ -257,8 +257,8 @@ class ApplyJob extends Component {
           <br />
 
           <div className="form-group">
-            <div className="col-sm-offset-4 col-sm-5">
-              <a onClick={(event) => this.setState({collapse: false})}>Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" className="btn btn-md btn-primary">Apply</button>
+            <div className="col-sm-offset-4 col-sm-5 apply-btns">
+              <a className="cancel-link" onClick={(event) => this.setState({collapse: false})}>Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" className="btn applynow-btn">Apply</button>
             </div>
           </div>
         </form>
@@ -281,31 +281,40 @@ class ApplyJob extends Component {
               chooseTab={this.handleTabPage} />
           </div>
 
-          {/* <div className="cover">
-
-          </div> */}
+          <div className="cover text-center">
+            <h1>{this.state.job.company}</h1>
+          </div>
 
           <div className="container job">
             {/* <div className="col-xs-12 text-center company-logo">
               <img />
             </div> */}
 
-            <div className="col-xs-12 text-center header">
-              <h2>{this.state.job.designation} at {this.state.job.company}</h2>
+            <div className="col-xs-12 apply-job-header">
+              <span className="col-xs-12 col-sm-4 text-right apply-job-header-content">
+                Image
+              </span>
+              <span className="col-xs-12 col-sm-6 make-center apply-job-header-content">
+                <h3>{this.state.job.designation}</h3>
+              </span>
+
               <br />
-              <div className="col-xs-12 col-md-8 col-md-offset-2 job-tags">
-                <p className="col-md-3 job-tags">Job ID: {this.state.job.jobID}</p>
-                <p className="col-md-3 job-tags">Posted by: {this.state.job.postedBy[0].name}</p>
-                <p className="col-md-3 job-tags">Posted on: {this.state.job.postedOn}</p>
-                <p className="col-md-3 job-tags">Location: {this.state.job.location}</p>
+              <div className="col-xs-12 col-md-8 col-md-offset-2 apply-job-header-content job-tags">
+                {/* <p className="col-md-3 job-tags">Job ID: {this.state.job.jobID}</p> */}
+                <p className="col-md-3 col-md-offset-3 job-tags"><i className="fa fa-map-marker fa-lg" /> &nbsp; {this.state.job.location}</p>
+                <p className="col-md-3 job-tags"><i className="fa fa-user fa-lg" /> &nbsp; {this.state.job.postedBy[0].name}</p>
+                <p className="col-md-3 job-tags"><i className="fa fa-calendar fa-lg" /> &nbsp; {this.state.job.postedOn}</p>
               </div>
+            </div>
+            &nbsp;
+              <hr id="header-separator"/>
+              {/* <br /><br /> */}
 
-              <br /><br />
-
+            <div>
               <div className="col-xs-12 col-md-0">&nbsp;</div>
 
               <div className="col-md-8 col-md-offset-2 about-job-header">
-                <h4>About</h4>
+                <h4>Job Description</h4>
                 <p className="text-justify apply-job-content">{this.state.job.description}</p>
               </div>
 
@@ -319,17 +328,18 @@ class ApplyJob extends Component {
               <br /><br />
               <div className="col-xs-12 col-md-0">&nbsp;</div>
 
-              <div className="col-xs-12 apply-now">
+              <div className="col-xs-12 text-center apply-now">
                 {this.state.isDisabled ?
                   <div>
-                    <button className="btn btn-primary btn-lg apply-btn" disabled onClick={() => this.setState({collapse: true})}>Apply Now</button>
+                    <button className="btn btn-lg applynow-btn" disabled onClick={() => this.setState({collapse: true})}>Applied</button>
                     <p><i className="fa fa-check-circle" /> &nbsp;You have already applied to this job</p>
                   </div> :
-                  <button className="btn btn-primary btn-lg apply-btn" onClick={() => this.setState({collapse: true})}>Apply Now</button>
+                  !this.state.collapse ? <button className="btn btn-lg applynow-btn" onClick={() => this.setState({collapse: true})}><i className="fa fa-paper-plane" /> Apply Now</button> : null
                 }
               </div>
             </div>
-            <div>&nbsp;</div>
+            {/* <br /> */}
+            {/* <div>&nbsp;</div> */}
             {this.state.collapse ? this.renderApplyForm() : null}
 
           </div>

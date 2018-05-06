@@ -20,7 +20,7 @@ class SearchBox extends Component {
 
   componentDidMount() {
     // console.log('Search component mounted');
-    // console.log(this.props);
+    console.log(this.props);
   }
 
   handleSubmit(event) {
@@ -60,7 +60,7 @@ class SearchBox extends Component {
               onChange={(event) => this.setState({search: event.target.value})}
              />
             <div className="input-group-btn">
-              <button className="btn btn-default btn-lg" onClick={this.handleSubmit}><i className="fa fa-search" /></button>
+              <button className="btn btn-lg btn-primary search-btn" onClick={this.handleSubmit}><i className="fa fa-search fa-lg" /></button>
             </div>
           </div>
           {/* <select value={this.state.type} onChange={(event) => this.setState({type: event.target.value})}>

@@ -76,7 +76,14 @@ class JobsPage extends Component {
   handleViewJob(event, job) {
     event.preventDefault();
     // console.log(job);
-
+    // console.log(job);
+    this.props.history.push({
+      pathname: `/applyjob`,
+      state: {
+        data: this.props.location.state,
+        job
+      }
+    })
   }
 
 
@@ -91,23 +98,46 @@ class JobsPage extends Component {
     });
   }
 
+  // renderJobs() {
+  //   return (
+  //     <div className="col-xs-12">
+  //       {this.state.jobs.map((value, index) => (
+  //         <div key={index} className="row each-job">
+  //           <div className="col-xs-12 header">
+  //             <div className="col-xs-4 col-md-1 img">Image</div>
+  //             <div className="col-xs-8 col-md-10 post"><p>{value.designation} <Link to={{pathname: '/applyjob', state: {data: this.props.location.state, job: value}}} className="view-job" >View job <i className="fa fa fa-share-square-o" /></Link></p></div>
+  //             {/* <div className="col-xs-8 col-md-5 post"><p>{value.designation}</p></div><div className="col-xs-8 col-xs-offset-4 col-md-2 col-md-offset-0 view-job">Hello</div> */}
+  //             <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 small-desc">Small Description to explain about the company</div>
+  //           </div>
+  //           <div className="col-xs-12 description">
+  //             <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">{value.company} - {value.location}</div>
+  //             <div className="col-xs-12">&nbsp;</div>
+  //             <div className="col-xs-11 col-md-offset-1 col-md-3 col-xs-offset-4"><i className="fa fa-check" /> {value.status}</div>
+  //             <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-paw" /> {value.applied.length} applicants</div>
+  //             {/* <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-users" /> <i>Test</i> employees</div> */}
+  //           </div>
+  //         </div>
+  //       ))}
+  //     </div>
+  //   )
+  // }
+
   renderJobs() {
     return (
-      <div className="col-xs-12">
+      <div className="">
+        <h2 className="text-center">Recent Jobs</h2>
+        <h3 className="col-xs-12">{this.state.jobs.length} jobs found</h3>
         {this.state.jobs.map((value, index) => (
-          <div key={index} className="row each-job">
-            <div className="col-xs-12 header">
-              <div className="col-xs-4 col-md-1 img">Image</div>
-              <div className="col-xs-8 col-md-10 post"><p>{value.designation} <Link to={{pathname: '/applyjob', state: {data: this.props.location.state, job: value}}} className="view-job" >View job <i className="fa fa fa-share-square-o" /></Link></p></div>
-              {/* <div className="col-xs-8 col-md-5 post"><p>{value.designation}</p></div><div className="col-xs-8 col-xs-offset-4 col-md-2 col-md-offset-0 view-job">Hello</div> */}
-              <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 small-desc">Small Description to explain about the company</div>
-            </div>
-            <div className="col-xs-12 description">
-              <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">{value.company} - {value.location}</div>
-              <div className="col-xs-12">&nbsp;</div>
-              <div className="col-xs-11 col-md-offset-1 col-md-3 col-xs-offset-4"><i className="fa fa-check" /> {value.status}</div>
-              <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-paw" /> {value.applied.length} applicants</div>
-              {/* <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-users" /> <i>Test</i> employees</div> */}
+          <div key={index} className="col-sm-4 job-content">
+            <div className="panel panel-body job-panel">
+              <span className="col-xs-12 text-center">Image</span>
+              <span className="col-xs-12 make-center job-post">{value.designation}</span>
+              <span className="col-xs-12 make-center job-company">{value.company}</span>
+              <hr className="job-separator" />
+              <span className="job-location"><i className="fa fa-map-marker" /> {value.location}</span>
+              <span className="pull-right">
+                <button className="btn-xs apply-btn" onClick={(event) => this.handleViewJob(event, value)}>APPLY NOW</button>
+              </span>
             </div>
           </div>
         ))}
@@ -135,9 +165,9 @@ class JobsPage extends Component {
             <h3>Over 1500+ jobs open. Apply now.</h3>
           </div>
 
-          <div className="container job-content">
+          <div className="row job-content">
             <div className="col-12 search">
-                <SearchBox onSearch={this.handleSearch}/>
+                <SearchBox onSearch={this.handleSearch} type='jobs'/>
             </div>
             <br /><br />
             <div className="col-xs-12 joblist-content">
