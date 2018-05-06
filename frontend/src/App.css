@@ -1,0 +1,450 @@
+/* .navigation {
+  border: 1px solid black;
+} */
+
+.tags {
+  padding: 0;
+}
+
+.lfg {
+  /* border: 1px solid black; */
+}
+
+.lfg {
+  font-size: 0.5em;
+}
+
+.profile-content {
+  border: 1px solid blue;
+}
+
+.header {
+  /* border: 1px solid red; */
+  padding: 20px;
+  /* height: 250px; */
+  /* width: 70%;
+  margin: auto; */
+}
+
+.others {
+  /* border: 1px solid black; */
+  padding: 0;
+}
+
+.name {
+  /* border: 1px solid black; */
+}
+
+.name-lfg {
+  /* border: 1px solid black; */
+  /* padding-left: 1.5px; */
+  padding: 0;
+}
+
+.name-lfg-edit {
+  /* border: 1px solid red; */
+  padding: 0;
+}
+
+.skills, .tags {
+  /* border: 1px solid black; */
+  padding: 0
+}
+
+.tags {
+  /* border: 1px solid black; */
+}
+
+.bread, .cancel {
+  /* border: 1px solid black; */
+}
+
+.about-job {
+  /* border: 1px solid black; */
+}
+
+.view-job {
+  font-size: 0.5em;
+  padding: 0;
+}
+
+.job {
+  border: 1px solid black;
+  /* width: 70%; */
+}
+
+.post > p {
+  font-size: 1.8em;
+}
+
+.cancel {
+  padding: 2.5px;
+}
+
+.edit {
+  font-size: 0.9em;
+  /* border: 1px solid black; */
+  padding: 22px 0 22px 45px;
+}
+
+.grad-cap, .grad-univ {
+  /* border: 1px solid black; */
+}
+
+.list {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.body {
+  /* border: 1px solid red; */
+  /* padding: 20px; */
+}
+
+.edit-profile-body {
+  /* border: 1px solid black; */
+  /* padding-bottom: 20px; */
+}
+
+.edit-profile-content {
+  padding-bottom: 100px;
+}
+
+.personal, .links {
+  padding: 15px
+}
+
+#whole-page {
+  background-color: #eee;
+  height: 100%;
+}
+
+hr {
+  border: 1px solid #ddd;
+}
+
+#year {
+  font-size: 0.7em;
+}
+
+.job-content {
+  border: 1px solid red;
+  padding: 15px;
+}
+
+.img, .post, .comp, .small-desc {
+  border: 1px solid black;
+  padding: 0;
+}
+
+/* .each-company {
+  border: 1px solid black;
+} */
+
+.each-job, .each-company {
+  /* border: 1px solid black; */
+  /* padding: 15px; */
+}
+
+.each-job:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.header {
+  padding: 15px;
+  /* border: 1px solid black; */
+}
+
+.description {
+  /* padding: 15px; */
+  /* border: 1px solid blue; */
+}
+
+.description > div {
+  /* border: 1px solid black; */
+  padding: 0;
+}
+
+.company-content {
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.company {
+  border: 1px solid black;
+}
+
+.header, .tabs, .tab {
+  border: 1px solid black;
+}
+
+.joblist-content {
+  border: 1px solid black;
+  padding: 0;
+}
+
+.job-tags {
+  /* border: 1px solid black; */
+  font-size: 0.9em;
+  padding: 0;
+}
+
+.apply-btn {
+  font-weight: lighter;
+}
+
+.apply-form {
+  border: 1px solid black;
+}
+
+.tab-name, .icon {
+  /* font-size: 0.8em; */
+  /* border: 1px solid blue; */
+}
+
+.tab-name {
+  padding: 0;
+}
+
+.icon {
+  /* border: 1px solid blue; */
+  padding: 0;
+}
+
+.about-company-content {
+  padding: 20px;
+}
+
+.postajob-content {
+  border: 1px solid black;
+}
+
+/* h4 {
+  border: 1px solid blue;
+} */
+
+.tab {
+  /* border: 1px solid red; */
+  padding: 0;
+  padding: 10px 0 7px 0;
+}
+
+.tabs{
+  padding: 8px 0;
+}
+
+th {
+  /* border: 1px solid black; */
+  text-align: center;
+}
+
+.gap {
+  /* border: 1px solid black; */
+  /* padding-left: 15px; */
+  padding: 0;
+}
+
+#hire, #dhire {
+  transition: 0.8s all;
+}
+
+#hire:hover {
+  background-color: green;
+  color: white;
+  -webkit-box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  transition: 0.8s all;
+}
+
+#dhire:hover {
+  background-color: #ff5959;
+  color: white;
+  -webkit-box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  box-shadow: -1px 3px 33px -8px rgba(0,0,0,0.75);
+  transition: 0.8s all;
+}
+
+#applicant-separator {
+  width: 95%;
+}
+
+#show-applicants, #list-applicants {
+  /* border: 1px solid black; */
+  height: 500px;
+  overflow-y: scroll;
+  /* padding-top: 15px; */
+}
+
+#show-applicants {
+  border-right: 0.6px solid #ddd;
+}
+
+#posted-header {
+  background-color: #eee;
+}
+
+#applicants-content {
+  /* border: 1px solid black; */
+  padding: 0;
+}
+
+#applicant-panel {
+  padding: 0;
+}
+
+.recruit-joblist {
+  padding-left: 0;
+}
+
+.disabled-link {
+  pointer-events: none;
+  color: grey;
+}
+
+td > a {
+  font-size: 0.7em;
+}
+
+.tab:hover {
+  background-color: #ccc;
+  transition: 0.7s all;
+  border-bottom: 2px solid black;
+  cursor: pointer;
+}
+
+.reviews {
+  border: 1px solid black;
+}
+
+.review-description {
+  padding: 0;
+  /* border: 1px solid black; */
+}
+
+.app-job {
+  /* border: 1px solid black; */
+}
+
+.badge-info {
+  background-color: #3a87ad;
+}
+
+.badge-success {
+  background-color: #468847;
+}
+
+.badge-danger {
+  background-color: #b94a48;
+}
+
+.success-rate {
+  padding: 0;
+}
+
+#searchbar {
+  width: 100%;
+}
+
+#success-rate-header {
+  font-size: 2em;
+}
+
+#show-success-rate {
+  font-size: 5em;
+  font-weight: lighter;
+}
+
+textarea {
+  resize: none;
+}
+
+h2 {
+  /* border: 1px solid black; */
+}
+
+a {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 641px) {
+  .make-center {
+    text-align: center;
+  }
+
+  .cancel {
+    padding-left: 15px;
+  }
+
+  .body {
+    padding-bottom: 20px;
+  }
+
+  .apply-job-content {
+    line-height: 1.8em;
+  }
+
+  .post {
+    font-size: 0.7em;
+  }
+  .about-company {
+    line-height: 1.9em;
+  }
+  .pros {
+    padding: 3px;
+  }
+  th {
+    font-size: 0.8em;
+  }
+  td {
+    font-size: 0.8em;
+  }
+  td.badge {
+    font-size: 0.7em;
+  }
+  .view-applicants-link {
+    font-size: 0.7em;
+  }
+
+}
+
+@media only screen and (min-width: 641px) {
+  .name {
+    padding: 0px;
+  }
+
+  .container {
+    width: 85%;
+  }
+
+  .cancel {
+    padding-left: 120px;
+  }
+
+  .personal {
+    border-right: 0.5px solid #ddd;
+  }
+
+  .body {
+    padding: 20px;
+  }
+
+  .about-company {
+    line-height: 2.2em;
+  }
+
+  .apply-job-content {
+    line-height: 2.5em;
+  }
+
+  .job-tags {
+    /* padding: 0 0 0 20px; */
+  }
+
+  .each-job, .each-company {
+    padding: 15px;
+  }
+
+}
