@@ -206,16 +206,16 @@ export const getMyAppliedJobs = (email) => {
 }
 
 
-export const updateHiring = (id, applicantEmail, jobID, status) => {
-  // console.log({status});
-  updateAppliedJobStatus(applicantEmail, jobID, status);
+export const updateHiring = (id, name, applicantEmail, jobID, jobCompany, jobPost, status) => {
+  // console.log({status, applicantEmail});
+  // updateAppliedJobStatus(applicantEmail, jobID, status);
 
   return fetch(`${url}/jobs/updatehiring/${id}`, {
     method: 'PATCH',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({status})
+    body: JSON.stringify({status, name, email: applicantEmail, company: jobCompany, designation: jobPost})
   }).then((res) => {
       return res.status
   }).catch((err) => {

@@ -11,11 +11,7 @@ sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 module.exports = (app, upload) => {
 
-  cloudinary.config({
-    cloud_name: 'jobboard',
-    api_key: '834296229844959',
-    api_secret: '3vFqT0defzwuT6c7RuchG_YkuFY'
-  });
+  
 
   /*************GET all_jobs**************/
   app.get('/jobs', (req, res) => {
@@ -165,8 +161,7 @@ module.exports = (app, upload) => {
           to: req.body.email,
           from: 'noreply@jobseek.com',
           subject: `Application Submitted. ${doc.designation} at ${doc.company}`,
-          text: `Dear ${req.body.firstname}, Thank you for considering ${doc.comapny} as your career choice. We have received your application for
-          ${doc.designation} position. Our team will get back to you if it's a good. fit. Good luck!`
+          text: `Dear ${req.body.firstname}, Thank you for considering ${doc.comapny} as your career choice. We have received your application for ${doc.designation} position. Our team will get back to you if it's a good. fit. Good luck!`
         };
 
         sgMail.send(msg);
@@ -179,9 +174,9 @@ module.exports = (app, upload) => {
 
     /*************Update hiring_status**************/
     app.patch('/jobs/updatehiring/:id', (req, res) => {
-      // console.log(req.body, req.params);
+      console.log(req.body, req.params);
       let isHired = req.body.status === 'yes' ? true : false;
-      // console.log(isHired);
+      console.log(isHired);
       Job.update(
         {'applied._id': req.params.id},
         {$set: {
@@ -189,6 +184,25 @@ module.exports = (app, upload) => {
         }},
         {returnOriginal: true}).then((doc) => {
           if (doc.nModified === 1) {
+            if (isHired) {
+              // console.log('Inside mailer', isHired);
+              // console.log(req.body);
+              const msg = {
+                to: req.body.email,
+                from: 'noreply@jobseek.com',
+                subject: `RE: Application for ${req.body.designation} at ${req.body.company}`,
+                text: `Dear ${req.body.name}, Congratulations!. After reviewing your profile, we would like to offer you the role of ${req.body.designation} at our company.`
+              };
+              sgMail.send(msg);
+            } else {
+              const msg = {
+                to: req.body.email,
+                from: 'noreply@jobseek.com',
+                subject: `RE: Application for ${req.body.designation} at ${req.body.company}`,
+                text: `Dear ${req.body.name}, We regret to inform you that after careful evaluation of your profile, we decided not to move forward with you. We wish you all the best in your future endeavours.`
+              };
+              sgMail.send(msg);
+            }
             res.status(200).send();
           } else {
             res.status(404).send();

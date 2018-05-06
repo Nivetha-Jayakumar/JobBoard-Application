@@ -10,6 +10,8 @@ class Recruit extends Component {
     this.state.show = false;
     this.state.applicants = [];
     this.state.jobID = '';
+    this.state.jobCompany = '';
+    this.state.jobPost = '';
     this.state.message = '';
     this.state.default = true;
     // this.state.hired = false;
@@ -47,11 +49,11 @@ class Recruit extends Component {
 
   }
 
-  handleHiring(event, id, applicantEmail, jobID, status) {
+  handleHiring(event, id, name, applicantEmail, jobID, jobCompany, jobPost, status) {
     event.preventDefault();
     // console.log(jobID);
 
-    API.updateHiring(id, applicantEmail, jobID, status).then((response) => {
+    API.updateHiring(id, name, applicantEmail, jobID, jobCompany, jobPost, status).then((response) => {
       if (response === 200) {
         this.setState({message: 'An email notification has been sent to the applicant.'});
 
@@ -112,7 +114,7 @@ class Recruit extends Component {
               <div className="panel panel-heading panel-default text-center" id="posted-header"><h4>Posted Jobs</h4></div>
               {this.state.jobs.map((value, index) => (
                 <div key={index} className="col-xs-12 panel panel-body recruit-joblist">
-                  <p className="col-xs-12 col-sm-7">{value.designation}</p> <a className="col-xs-12 col-sm-5 text-right view-applicants-link" onClick={() => this.setState({show: true, applicants: value.applied, jobID: value.jobID, default: false})}><i className="fa fa-users" /> View applicants</a>
+                  <p className="col-xs-12 col-sm-7">{value.designation}</p> <a className="col-xs-12 col-sm-5 text-right view-applicants-link" onClick={() => this.setState({show: true, applicants: value.applied, jobID: value.jobID, jobCompany: value.company, jobPost: value.designation, default: false})}><i className="fa fa-users" /> View applicants</a>
                 </div>
               ))}
             </div>
@@ -124,8 +126,8 @@ class Recruit extends Component {
                     <p className="col-xs-12 col-sm-6">{value.firstname} {value.lastname} <a><i className="fa fa-external-link" /></a></p>
                       {value.isHired === undefined ?
                         <span className="col-xs-12 col-sm-6 hire-btns">
-                          <button className="btn btn-default btn-xs" id="hire" onClick={(event) => this.handleHiring(event, value._id, value.email, this.state.jobID, 'yes')}><i className="fa fa-check" /> Hire</button> &nbsp;
-                          <button className="btn btn-default btn-xs" id="dhire" onClick={(event) => this.handleHiring(event, value._id, value.email, this.state.jobID, 'no')}><i className="fa fa-close" /> Don't hire</button>
+                          <button className="btn btn-default btn-xs" id="hire" onClick={(event) => this.handleHiring(event, value._id, value.firstname, value.email, this.state.jobID, this.state.jobCompany, this.state.jobPost, 'yes')}><i className="fa fa-check" /> Hire</button> &nbsp;
+                          <button className="btn btn-default btn-xs" id="dhire" onClick={(event) => this.handleHiring(event, value._id, value.firstname, value.email, this.state.jobID, this.state.jobCompany, this.state.jobPost, 'no')}><i className="fa fa-close" /> Don't hire</button>
                         </span> : value.isHired === false ?
                             <span className="col-xs-12 col-sm-6 hire-btns"><button className="btn btn-default btn-xs btn-danger" disabled><i className="fa fa-close" /> Not hired</button></span> :
                             <span className="col-xs-12 col-sm-6 hire-btns"><button className="btn btn-default btn-xs btn-success" disabled><i className="fa fa-check" /> Hired</button></span>
