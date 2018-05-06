@@ -3,11 +3,17 @@ const moment = require('moment');
 // const multer = require('multer');
 // var upload = multer({ dest: '../uploads/' });
 const cloudinary = require('cloudinary').v2;
+const config = require('./config');
 const {User} = require('../models/users');
 
 module.exports = (app, upload) => {
 
-  
+  cloudinary.config({
+    cloud_name: config.CLOUD_NAME,
+    api_key: config.API_KEY,
+    api_secret: config.API_SECRET
+  });
+
   /********Get all_users**********/
   app.get('/users', (req, res) => {
     User.find().then((docs) => {
