@@ -147,11 +147,11 @@ class CompaniesList extends Component{
         {this.state.companies.map((value, index) => (
           <div key={index} className="col-sm-4 job-content item active">
             <div className="panel panel-body job-panel">
-              <span className="col-xs-12 text-center">Image</span>
+              <span className="col-xs-12 text-center company-logo"><img src={value.image} /></span>
               <span className="col-xs-12 make-center job-post">{value.name}</span>
               <span className="col-xs-12 make-center job-company">{value.location}</span>
               <hr className="job-separator" />
-              <span className="job-location"><i className="fa fa-users" /> {value.size} employees</span>
+              <span className="job-location"><i className="fa fa-users" /> {value.size}</span>
               <span className="pull-right">
                 <button className="btn-xs apply-btn" onClick={(event) => this.handleViewJob(event, value)}>VIEW PAGE</button>
               </span>
@@ -168,7 +168,7 @@ class CompaniesList extends Component{
       return <Redirect to="/" />
     } else {
       return (
-        <div className="container">
+        <div className="container" id="companies-list">
           <div className="navbar">
             <Navbar
               onSearch={this.handleIt}
@@ -188,7 +188,7 @@ class CompaniesList extends Component{
                 <SearchBox onSearch={this.handleSearch}/>
             </div>
             <br /><br />
-            <div className="col-xs-12 companylist-content">
+            <div className="row companylist-content">
               {/* {this.state.jobs.length ? this.renderJobs() : null} */}
               {Object.keys(this.state.searchCompany).length ? this.renderSearchCompany() : this.renderCompanies()}
             </div>

@@ -9,31 +9,31 @@ import '../App.css';
 class ProfilePage extends Component {
   constructor(props){
     super(props);
-    this.state = this.props.location.state;
+    this.state = this.props.location.state || this.props.match.params;
     this.state.redirect = false;
     // this.state.file = null;
-    this.state.editable = false;
-    this.state.addSkill = false;
-    this.state.addProject = false;
-    this.state.addEducation = false;
-    this.state.addWork = false;
-    this.state.skillset = {};
-    this.state.addUniversity = '';
-    this.state.addMajor = '';
-    this.state.addDegree = '';
-    this.state.addGPA = '';
-    this.state.addAchievements = '';
-    this.state.gradMonth = 'January';
-    this.state.gradYear = '2019';
-    this.state.addTitle = '';
-    this.state.addDescription = '';
-    this.state.addRole = '';
-    this.state.addLink = '';
-    this.state.addCompany = '';
-    this.state.addJob = '';
-    this.state.addJobDesc = '';
-    this.state.addFromYear = '2017';
-    this.state.addToYear = 'Present';
+    // this.state.editable = false;
+    // this.state.addSkill = false;
+    // this.state.addProject = false;
+    // this.state.addEducation = false;
+    // this.state.addWork = false;
+    // this.state.skillset = {};
+    // this.state.addUniversity = '';
+    // this.state.addMajor = '';
+    // this.state.addDegree = '';
+    // this.state.addGPA = '';
+    // this.state.addAchievements = '';
+    // this.state.gradMonth = 'January';
+    // this.state.gradYear = '2019';
+    // this.state.addTitle = '';
+    // this.state.addDescription = '';
+    // this.state.addRole = '';
+    // this.state.addLink = '';
+    // this.state.addCompany = '';
+    // this.state.addJob = '';
+    // this.state.addJobDesc = '';
+    // this.state.addFromYear = '2017';
+    // this.state.addToYear = 'Present';
 
     // this.login = this.login.bind(this);
     this.handleIt = this.handleIt.bind(this);
@@ -53,7 +53,7 @@ class ProfilePage extends Component {
     // console.log('Profilepage Component Mounted');
     // console.log(this.props.location.state);
     // console.log(this.state);
-    // console.log(this.props);
+    console.log(this.state);
   }
 
   handleIt(string) {
@@ -487,6 +487,24 @@ class ProfilePage extends Component {
     )
   }
 
+  renderViewProfile() {
+    return (
+      <div className="container">
+        <div className="navbar">
+          <Navbar
+            onSearch={this.handleIt}
+            status={this.state.isLoggedIn}
+            data={this.props.location.state}
+            chooseTab={this.handleTabPage} />
+        </div>
+
+        <div>
+
+        </div>
+      </div>
+    )
+  }
+
 
 
   renderJobSeekerProfile() {
@@ -769,7 +787,11 @@ class ProfilePage extends Component {
       return <Redirect to='/' />
     }
 
-    if (!this.state || !this.state.isLoggedIn) {
+    if (this.state.profile) {
+      return this.renderViewProfile();
+    }
+
+    if (!this.state.isLoggedIn) {
       return (
         <div>
           <p>Please <button onClick={this.setState({redirect: true})}>login</button> to continue</p>

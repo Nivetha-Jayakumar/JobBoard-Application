@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  views: {
+    type: String,
+    trim: true
+  },
   joined: {
     type: String
   },

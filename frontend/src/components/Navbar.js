@@ -66,7 +66,7 @@ class Navbar extends Component {
         <div>
           <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
           <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
-          {/* <a onClick={() => this.handleTabs('recruit')}>Recruit</a>&nbsp; */}
+          <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
           <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
           <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
           <a onClick={() => this.handleTabs('logout')}>Logout</a>&nbsp;
@@ -81,7 +81,7 @@ class Navbar extends Component {
         <div>
           <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
           <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
-          {/* <a onClick={() => this.handleTabs('recruit')}>Recruit</a>&nbsp; */}
+          <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
           <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
           <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
           <a onClick={() => this.handleTabs('postajob')}>Post a Job</a>&nbsp;

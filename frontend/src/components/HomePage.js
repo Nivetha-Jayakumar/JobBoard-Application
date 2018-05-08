@@ -26,25 +26,7 @@ class HomePage extends Component {
 
 
                 </div>
-                <div className="modal-footer">  <div className="container">
-                    <div className="row">
-                        <h3>About US</h3>
-                        <div className="left-div col-sm-8">
-                            <div>
-                                <image ></image>
-                                <p>Raghav Anandan: Computer Engineering SJSU</p>
-                            </div>
-                            <div>
-                                <p>Mangesh Ashtankar: Computer Engineering SJSU</p>
-                                <image></image>
-                            </div>
-                            <div>
-                                <image></image>
-                                <p>Ajay Chauhan: Software Engineering SJSU San Jose, California</p>
-                            </div>
-                        </div>
-                    </div>
-                </div></div>
+                
 
             </div>
         )
