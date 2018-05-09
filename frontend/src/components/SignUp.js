@@ -75,7 +75,7 @@ class SignUp extends Component {
         //   }
         // }
         this.setState({isEmployer: true}, () => {
-            // console.log(this.state);
+            console.log(this.state);
             let {firstname, lastname, email, password, company, designation, isEmployer} = this.state;
             if (firstname && lastname && email && password && company && designation && isEmployer) {
                 var user = {firstname, lastname, email, password, company, designation, isEmployer};
@@ -205,7 +205,7 @@ class SignUp extends Component {
 
     renderRecruiterSignUp() {
         return (
-            <div class="two">
+            <div className="two">
                 <div>
                     <div className="container1">
 
@@ -223,7 +223,7 @@ class SignUp extends Component {
                                 <div className="form-group">
                                     <input type="text" name="fname" className="form-control input-lg"
                                            placeholder="First Name"
-                                           onChange={(event) => this.setState({fisrtname: event.target.value})}/>
+                                           onChange={(event) => this.setState({firstname: event.target.value})}/>
                                 </div>
                                 <br/>
                                 {/*<label c>

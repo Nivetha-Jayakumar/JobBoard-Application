@@ -27,7 +27,7 @@ class Login extends Component {
             let {email, password} = this.state;
             // API.getUser({email, password});
             API.getUser({email, password}).then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (!data) {
                     this.setState({error: 'Please check your credentials'});
                     // this.props.history.push({
@@ -39,6 +39,7 @@ class Login extends Component {
                     data.isLoggedIn = true;
                     // console.log(data.isLoggedIn);
                     let profile = data.firstname.toLowerCase() + data.lastname.toLowerCase();
+                    console.log(profile);
                     this.props.history.push({
                         pathname: `/in/${profile}`,
                         state: data

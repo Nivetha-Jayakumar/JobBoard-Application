@@ -19,6 +19,7 @@ class CompaniesList extends Component{
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleTabPage = this.handleTabPage.bind(this);
+    this.handleViewJob = this.handleViewJob.bind(this);
   }
 
   componentWillMount() {
@@ -87,34 +88,34 @@ class CompaniesList extends Component{
     });
   }
 
+  handleViewJob(event, company) {
+    event.preventDefault();
+    // gotoCompany(company);
+    this.props.history.push({
+      pathname: `/companies/${company.name}`,
+      state: {
+        data: this.props.location.state,
+        company
+      }
+    })
+
+  }
+
   renderSearchCompany() {
     return (
-      // <div className="col-xs-12">
-      //   <div className="row each-company">
-      //     <div className="col-xs-12 header">
-      //       <div className="col-xs-4 col-md-1 img">Image</div>
-      //       <div className="col-xs-8 col-md-11 post"><p>{this.state.searchCompany.name} <Link to={{pathname: `/companies/${this.state.searchCompany.name}`, state: {company: this.state.searchCompany, data: this.props.location.state}}} className="view-job" >View company <i className="fa fa fa-share-square-o" /></Link></p></div>
-      //       <div className="col-xs-4 col-xs-offset-4 col-md-3 col-md-offset-1 small-desc"><i className="fa fa-map-marker" /> {this.state.searchCompany.location}</div>
-      //       <div className="col-xs-4 col-md-4 pull-left small-desc"><i className="fa fa-users" /> {this.state.searchCompany.size} <span className="hidden-xs">employees</span></div>
-      //     </div>
-      //     <div className="col-xs-12 description">
-      //       <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">{this.state.searchCompany.short_description}</div>
-      //     </div>
-      //   </div>
-      // </div>
       <div className="">
         <h2 className="text-center">Search results for "{this.state.search}"</h2>
         {/* <h3 className="col-xs-12">{this.state.companies.length} companies found</h3> */}
         {/* {this.state.companies.map((value, index) => ( */}
           <div className="col-sm-4 job-content">
             <div className="panel panel-body job-panel">
-              <span className="col-xs-12 text-center"><img src={this.state.searchCompany.image} alt={this.state.searchCompany.name} /></span>
+              <span className="col-xs-12 text-center company-logo"><img src={this.state.searchCompany.image} alt={this.state.searchCompany.name} /></span>
               <span className="col-xs-12 make-center job-post">{this.state.searchCompany.name}</span>
               <span className="col-xs-12 make-center job-company">{this.state.searchCompany.location}</span>
               <hr className="job-separator" />
               <span className="job-location"><i className="fa fa-users" /> {this.state.searchCompany.size} employees</span>
               <span className="pull-right">
-                <button className="btn-xs apply-btn" onClick={(event) => this.handleViewJob(event)}>VIEW PAGE</button>
+                <button className="btn-xs apply-btn" onClick={(event) => this.handleViewJob(event, this.state.searchCompany)}>VIEW PAGE</button>
               </span>
             </div>
           </div>
@@ -141,8 +142,8 @@ class CompaniesList extends Component{
       //   ))}
       // </div>
       <div className="">
-        <h2 className="text-center">Most followed companies</h2>
-        <h3 className="col-xs-12">{this.state.companies.length} companies found</h3>
+        <h3 className="text-center">Most followed companies</h3>
+        <h4 className="col-xs-12">{this.state.companies.length} companies</h4>
         <div id="joblist-content">
         {this.state.companies.map((value, index) => (
           <div key={index} className="col-sm-4 job-content item active">
@@ -168,7 +169,8 @@ class CompaniesList extends Component{
       return <Redirect to="/" />
     } else {
       return (
-        <div className="container" id="companies-list">
+        <div>
+        <div className="container">
           <div className="navbar">
             <Navbar
               onSearch={this.handleIt}
@@ -177,25 +179,27 @@ class CompaniesList extends Component{
               type={this.props.location.state.isEmployer}
               chooseTab={this.handleTabPage} />
           </div>
+        </div>
 
-          {/* <br /> */}
-          <div className="text-center">
-            <h3>Over 100+ Fortune 500 companies use JobSeek.</h3>
-          </div>
-
-          <div className="company-content">
+          <div>&nbsp;</div>
+          <div className="text-center" id="company-search">
+            <h1>Over 100+ Fortune 500 companies use JobSeek.</h1>
+            <br /><br />
             <div className="col-12 search">
                 <SearchBox onSearch={this.handleSearch}/>
             </div>
-            <br /><br />
+          </div>
+
+        <div className="list-container">
+          <div className="container company-content">
             <div className="row companylist-content">
               {/* {this.state.jobs.length ? this.renderJobs() : null} */}
               {Object.keys(this.state.searchCompany).length ? this.renderSearchCompany() : this.renderCompanies()}
             </div>
-
           </div>
-
         </div>
+        </div>
+
       )
     }
   }

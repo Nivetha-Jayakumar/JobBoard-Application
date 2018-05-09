@@ -37,7 +37,7 @@ class CompanyPage extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.location.state);
+    console.log(this.state);
     // console.log(this.props);
     let company = this.state.company.name;
     // if (this.props.location.state) {
@@ -412,6 +412,7 @@ class CompanyPage extends Component {
     // let company = this.state.company;
     // console.log(this.state);
     return (
+      <div>
       <div className="container">
         <div className="navbar">
           <Navbar
@@ -421,19 +422,27 @@ class CompanyPage extends Component {
             type={this.props.location.state.data.isEmployer}
             chooseTab={this.handleTabPage} />
         </div>
+      </div>
 
-        {/* <div className="cover">
+      <div className="text-center company-cover" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525839201/workplace.jpg)`}}>
 
-        </div> */}
+      </div>
 
-        <div className="container company">
-          {/* <div className="col-xs-12 text-center company-logo">
-            <img />
-          </div> */}
-          
-          <div className="col-xs-12 text-center header">
-            <h2>{this.state.company.name}</h2>
-            <div className="col-xs-12 col-md-8 col-md-offset-2 company-tags">
+      <div className="main" id="companypage">
+        <div className="container panel panel-body company">
+
+          <div className="text-center companypage-logo">
+            <img
+              className="avatar"
+              src={this.state.company.image}
+              alt={this.state.company.name}
+              style={{width: 250}}
+            />
+          </div>
+
+          <div className="text-center">
+            {/* <h2>{this.state.company.name}</h2> */}
+            <div className="col-xs-12">
               <p><i className="fa fa-map-marker" /> {this.state.company.location}</p>
             </div>
             <br />
@@ -492,6 +501,8 @@ class CompanyPage extends Component {
 
         </div>
       </div>
+      </div>
+
     )
   }
 

@@ -162,6 +162,23 @@ hr {
   /* height: 190px; */
 }
 
+.companypage-logo > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  /* border: 1px solid #000; */
+}
+
+.companypage-logo {
+  margin-top: -90px;
+  /* border-radius: 200px; */
+  /* border: 1px solid black; */
+}
+
+#companypage {
+  padding-top: 15px;
+}
+
 .user-avatar > img {
   width: 50%;
   height: 50%;
@@ -241,12 +258,12 @@ hr {
 }
 
 .company {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
-.header, .tabs, .tab {
+/* .header, .tabs, .tab {
   border: 1px solid black;
-}
+} */
 
 .companylist-content {
   padding: 0;
@@ -399,12 +416,56 @@ th {
   /* border: 1px solid black; */
   /* padding-left: 15px; */
   padding: 0;
-  width: 48%;
+  /* height: 200px; */
 }
 
-/* .profile-views {
-  margin-left: 39px;
+.nav-tabs {
+  transition: 0.6s all;
+  border: none;
+}
+
+.navbar {
+  /* border: 1px solid; */
+}
+
+#home-page, #home-page-content {
+  /* border: 1px solid; */
+}
+
+#highlight {
+  font-size: 2em;
+  color: #d42525;
+}
+
+#home-page-header {
+  padding: 170px 0;
+  /* height: 100vh; */
+}
+
+#home-page-working {
+  border: 1px solid red;
+}
+
+#home-page-working > h5 {
+  color: gray;
+}
+
+.how-to-icon {
+  border: 1px solid black;
+  /* font-size: 4em; */
+  color: #d42525;
+  /* padding: 20px; */
+  border-radius: 300px;
+}
+
+/* .navbar-container > a > img {
+  width: 100%;
+  height: 30px;
 } */
+
+.profile-views {
+  float: right;
+}
 
 .applynow-btn {
   background-color: white;
@@ -425,8 +486,59 @@ th {
 
 .search-btn {
   /* border-right: 0.9px solid #aaa; */
-  /* background-color: #d42525; */
+  background-color: #d42525;
+  transition: 0.6s all;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 11px;
+  border-radius: 24px;
   /* z-index: 2; */
+}
+
+#company-search, #job-search {
+  /* border: 1px solid black; */
+  padding: 100px;
+  background-image: url('');
+  background-position: center;
+  background-size: cover;
+}
+
+#company-search > h1 {
+  /* color: #fff; */
+}
+
+.company-cover{
+  /* border: 1px solid black; */
+  height: 260px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.list-container, .main {
+  background-color: #f7f7f7;
+}
+
+.main {
+  /* padding-top: 20px; */
+}
+
+.searchbox-component {
+  border: 3px solid rgba(0,0,0,.1);
+  border-radius: 24px;
+  padding: 0;
+}
+
+.searchbox-component >  input {
+  border-radius: 24px;
+  border: none;
+  outline: none;
+}
+
+.search-btn:hover {
+  background-color: #ad2222;
+  transition: 0.6s all;
+  color: #fff;
 }
 
 .apply-btn {

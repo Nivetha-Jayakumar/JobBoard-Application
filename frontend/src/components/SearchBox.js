@@ -50,7 +50,7 @@ class SearchBox extends Component {
             placeholder="Ex: Software Engineer"
             onChange={(event) => this.setState({search: event.target.value})} />
           <button className="btn btn-default" onClick={this.handleSubmit}><i className="fa fa-search"/></button> */}
-          <div className="input-group add-on">
+          <div className="input-group searchbox-component">
             <input
               id="searchbar"
               className="form-control input-lg"
@@ -59,9 +59,9 @@ class SearchBox extends Component {
               autoFocus
               onChange={(event) => this.setState({search: event.target.value})}
              />
-            <div className="input-group-btn">
-              <button className="btn btn-lg btn-primary search-btn" onClick={this.handleSubmit}><i className="fa fa-search fa-lg" /></button>
-            </div>
+            <span className="input-group-btn">
+              <button className="btn btn-lg search-btn" onClick={this.handleSubmit}><i className="fa fa-search fa-lg" /></button>
+            </span>
           </div>
           {/* <select value={this.state.type} onChange={(event) => this.setState({type: event.target.value})}>
             <option value="jobs">Jobs</option>

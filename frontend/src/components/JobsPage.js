@@ -87,7 +87,6 @@ class JobsPage extends Component {
   }
 
 
-
   handleCompanySize(company, callback) {
     // API.getCompanySize(company);
     API.getCompanySize(company).then((response) => {
@@ -98,35 +97,11 @@ class JobsPage extends Component {
     });
   }
 
-  // renderJobs() {
-  //   return (
-  //     <div className="col-xs-12">
-  //       {this.state.jobs.map((value, index) => (
-  //         <div key={index} className="row each-job">
-  //           <div className="col-xs-12 header">
-  //             <div className="col-xs-4 col-md-1 img">Image</div>
-  //             <div className="col-xs-8 col-md-10 post"><p>{value.designation} <Link to={{pathname: '/applyjob', state: {data: this.props.location.state, job: value}}} className="view-job" >View job <i className="fa fa fa-share-square-o" /></Link></p></div>
-  //             {/* <div className="col-xs-8 col-md-5 post"><p>{value.designation}</p></div><div className="col-xs-8 col-xs-offset-4 col-md-2 col-md-offset-0 view-job">Hello</div> */}
-  //             <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 small-desc">Small Description to explain about the company</div>
-  //           </div>
-  //           <div className="col-xs-12 description">
-  //             <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">{value.company} - {value.location}</div>
-  //             <div className="col-xs-12">&nbsp;</div>
-  //             <div className="col-xs-11 col-md-offset-1 col-md-3 col-xs-offset-4"><i className="fa fa-check" /> {value.status}</div>
-  //             <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-paw" /> {value.applied.length} applicants</div>
-  //             {/* <div className="col-xs-11 col-md-offset-0 col-md-3 col-xs-offset-4"><i className="fa fa-users" /> <i>Test</i> employees</div> */}
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   )
-  // }
-
   renderJobs() {
     return (
       <div id="renderjobs-content">
         <h2 className="text-center">Recent Jobs</h2>
-        <h3 className="col-xs-12">{this.state.jobs.length} jobs found</h3>
+        <h3 className="col-xs-12">{this.state.jobs.length} job (s)</h3>
         <div id="job-div">
         {this.state.jobs.map((value, index) => (
           <div key={index} className="col-sm-4 job-content">
@@ -152,6 +127,7 @@ class JobsPage extends Component {
       return <Redirect to="/" />
     } else {
       return (
+        <div>
         <div className="container">
           <div className="navbar">
             <Navbar
@@ -161,21 +137,24 @@ class JobsPage extends Component {
               type={this.props.location.state.isEmployer}
               chooseTab={this.handleTabPage} />
           </div>
+        </div>
 
-          {/* <br /> */}
-          <div className="text-center">
-            <h3>Over 1500+ jobs open. Apply now.</h3>
-          </div>
-
-          <div className="row job-content">
+        <div>&nbsp;</div>
+          <div className="text-center" id="job-search">
+            <h1>Over 1500+ jobs open. Apply now.</h1>
+            <br /><br />
             <div className="col-12 search">
                 <SearchBox onSearch={this.handleSearch} type='jobs'/>
             </div>
-            <br /><br />
-            <div className="col-xs-12 joblist-content">
-              {this.state.jobs.length ? this.renderJobs() : null}
-            </div>
+          </div>
 
+          <div className="list-container">
+            <div className="container job-content">
+              <div className="col-xs-12 joblist-content">
+                {this.state.jobs.length ? this.renderJobs() : null}
+              </div>
+
+            </div>
           </div>
         </div>
       )

@@ -172,19 +172,13 @@ class App extends Component {
     // console.log(profileurl);
     // console.log('URL outside if', url);
       return (
-        <div>
-          {/* <div> */}
-            {/* <SearchBox onSearch={this.handleSearch} /> */}
-            {/* <Navbar onSearch={this.handleSearch} /> */}
-          {/* </div> */}
+        <div id="home-page">
           <Route exact path="/" render={(props) => (
             <div>
               <div>
                 <Navbar {...props} onSearch={this.handleSearch} type={this.state.isEmployer} status={this.state.isLoggedIn}/>
               </div>
-              <br />
               <div>
-                {/* <SignUp {...props} onLogin={this.handleLogin} /> */}
                 <HomePage />
               </div>
             </div>

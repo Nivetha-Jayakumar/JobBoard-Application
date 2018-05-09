@@ -91,10 +91,12 @@ class EditProfile extends Component {
     // console.log(data);
     API.updateProfile(data, id).then((response) => {
       // console.log(response);
-      this.setState(response);
-      this.props.history.push({
-        pathname: `/in/${this.props.match.params.name}`,
-        state: this.state
+      this.setState(response, () => {
+        let profile = response.firstname.toLowerCase() + response.lastname.toLowerCase();
+        this.props.history.push({
+          pathname: `/in/${profile}`,
+          state: this.state
+        });
       });
     }).catch((err) => {
       console.log(err);

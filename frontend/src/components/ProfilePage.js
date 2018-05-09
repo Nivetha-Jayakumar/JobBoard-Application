@@ -632,7 +632,7 @@ class ProfilePage extends Component {
 
 
 
-  renderJobSeekerProfile() {
+  renderProfile() {
     return (
       <div>
       <div className="navbar">
@@ -654,6 +654,7 @@ class ProfilePage extends Component {
 
       </div>
 
+      <div className="main">
       <div className="profile-view container">
 
         <div className="container panel panel-body profile-content">
@@ -675,16 +676,6 @@ class ProfilePage extends Component {
                 {this.state.github ? <i className="fa fa-github" /> : null}
               </span>
           </div>
-            {/* <div className="col-md-8 others">
-              <div className="col-md-12 make-center name-lfg-edit">
-                <div className="col-md-10 name-lfg"><h2 className="name">{this.state.firstname} {this.state.lastname} &nbsp; <span className="lfg">{this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</span></h2></div> */}
-                {/* <div className="col-md-2 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-linkedin" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</div> */}
-                {/* <div className="col-md-1 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-facebook-f" /> : null}</div> */}
-                {/* <div className="col-md-2 hidden-xs pull-right edit"><a onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a></div> */}
-                 {/* {this.state.linkedin ? <i className="fa fa-linkedin col-xs-12 col-md-2" /> : null} */}
-                  {/* <a className="col-md-2 col-md-offset-3 hidden-xs pull-right edit" onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a> */}
-                {/* </h2> */}
-              {/* </div> */}
 
 
               <div className="text-center skills">
@@ -760,154 +751,11 @@ class ProfilePage extends Component {
 
             <div id="experience">
               <h4 className="profile-section-headers">EXPERIENCE</h4><br />
-              <div className="list">
-                {this.state.experience.length ?
-                <span>{this.state.experience.map((value, index) => (
-                  <div key={index} className="row">
-                    <div className="col-md-2 text-center hidden-xs proj-img">
-                      <i className="fa fa-graduation-cap fa-4x" />
-                    </div>
-                    <div className="col-md-6 col-xs-12 proj-desc">
-                      <p>{value.company}</p>
-                      <h4>{value.role} <span id="year">({value.years})</span></h4>
-                      <p>{value.description}</p>
-                    </div>
-                  </div>
-                ))}</span> : <a onClick={(event) => this.setState({addWork: true})}><i className="fa fa-plus-square-o" /> Add work experience</a>}<br />
-                {this.state.addWork ? <div>{this.renderAddWork()}</div> : null}
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-
-    )
-  }
-
-  renderEmployerProfile() {
-    return (
-      <div className="container">
-        <div className="navbar">
-          <Navbar
-            onSearch={this.handleIt}
-            status={this.state.isLoggedIn}
-            data={this.state}
-            type={this.props.location.state.isEmployer}
-            chooseTab={this.handleTabPage} />
-        </div>
-
-        {/* <div className="cover">
-
-        </div> */}
-        {/* <br /> */}
-
-        <div className="container profile-content">
-
-          <div className="row header">
-            <div className="col-md-4 make-center text-right image">
-              <img
-                className="avatar"
-                src={this.state.avatar}
-                alt={this.state.firstname}
-                style={{width: 200}}
-              />
-            </div>
-            <div className="col-md-8 others">
-              <div className="col-md-12 make-center name-lfg-edit">
-                <div className="col-md-10 name-lfg"><h2 className="name">{this.state.firstname} {this.state.lastname} &nbsp; <span className="lfg">{this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</span></h2></div>
-                {/* <div className="col-md-2 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-linkedin" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</div> */}
-                {/* <div className="col-md-1 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-facebook-f" /> : null}</div> */}
-                <div className="col-md-2 hidden-xs pull-right edit"><a onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a></div>
-                 {/* {this.state.linkedin ? <i className="fa fa-linkedin col-xs-12 col-md-2" /> : null} */}
-                  {/* <a className="col-md-2 col-md-offset-3 hidden-xs pull-right edit" onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a> */}
-                {/* </h2> */}
-              </div>
-
-
-              <div className="col-md-12 col-xs-12 make-center skills">
-                <br />
-                {this.state.aboutme ? <p>{this.state.aboutme}</p> : null}
-                {this.state.skills ?
-                  <p>Experience with {this.state.skills}</p> :
-                  <a onClick={(event) => this.setState({addSkill: true})}>+ Add a skill</a>}<br />
-                {this.state.addSkill ? <textarea className="col-xs-6 form-control" cols="50" rows="3" placeholder="Enter skills separated by comma" onChange={(event) => this.setState({skillset: event.target.value})}/> : null}
-                <div>&nbsp;</div>
-                {this.state.addSkill ? <div className="text-justify"><a onClick={(event) => this.setState({addSkill: false})}>Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;<Button className="btn btn-xs btn-primary" onClick={this.handleUpdateSkills}>Save</Button></div> : null}<br />
-              </div>
-
-              <div className="col-xs-12 tags">
-                {this.state.designation !== 'N/A' ? <p className="tags col-xs-4"><i className="fa fa-suitcase" /> {this.state.designation}</p> : null}
-                {this.state.location ? <p className="tags col-xs-4"><i className="fa fa-map-marker" /> {this.state.location}</p> : null}
-                {this.state.education.length ? <p className="tags col-xs-4"><i className="fa fa-graduation-cap" /> {this.state.education[0].university}</p> : null}
-              </div>
-
-            </div>
-          </div>
-
-          <br /><br /><br /><br />
-
-          <div className="body">
-            <div id="education">
-              <h4>EDUCATION</h4><br />
-              <a onClick={(event) => this.setState({addEducation: true})}><i className="fa fa-plus-square-o"/> Add an education</a>
-              {this.state.addEducation ? <div>{this.renderAddEducation()}</div> : null}
-              <div>&nbsp;</div>
               {/* <div className="list"> */}
-                {this.state.education.length ?
-                  <span>{this.state.education.map((value, index) => (
-                    <div key={index} className="row profile-section">
-                      <div className="col-md-2 text-center hidden-xs grad-cap">
-                        <i className="fa fa-graduation-cap fa-4x" />
-                      </div>
-                      <div className="col-md-10 col-xs-12 grad-univ">
-                        <p>{value.university.toUpperCase()} . {value.gradDate.toUpperCase()}</p>
-                        <p>{value.degree}, {value.major}</p>
-                        <p>GPA: {value.gpa}</p>
-                        <p>{value.achievements}</p>
-                      </div>
-                      {this.state.education.length === 1 ? null : <hr />}
-                    </div>
-                  ))}</span> : null}<br />
-                  {/* {this.state.addEducation ? <div>{this.renderAddEducation()}</div> : null} */}
-              {/* </div> */}
-            </div><br />
-            <hr />
-            <div id="projects">
-              <h4>PROJECTS</h4><br />
-              <a onClick={(event) => this.setState({addProject: true})}><i className="fa fa-plus-square-o"/> Add a project</a>
-              {this.state.addProject ? <div>{this.renderAddProject()}</div> : null}
-              <div>&nbsp;</div>
-              {/* <div className="list"> */}
-                {this.state.projects.length ?
-                <span>{this.state.projects.map((value, index) => (
-                  <div key={index} className="row profile-section">
-                    <div className="col-md-2 text-center hidden-xs proj-img">
-                      <i className="fa fa-graduation-cap fa-4x" />
-                    </div>
-                    <div className="col-md-10 col-xs-12 proj-desc">
-                      <p>{value.title} &nbsp; <a href={value.link} target="_blank"><i className="fa fa fa-share-square-o"/></a></p>
-                      <p>{value.description}</p>
-                      <p>{value.role}</p>
-                    </div>
-                    {this.state.projects.length === 1 ? null : <hr />}
-                  </div>
-                ))}</span> : null}<br />
-                {/* {this.state.addProject ? <div>{this.renderAddProject()}</div> : null} */}
-              {/* </div> */}
-            </div><br />
-            <hr />
-            <div id="experience">
-              <h4>EXPERIENCE</h4><br />
               <a onClick={(event) => this.setState({addWork: true})}><i className="fa fa-plus-square-o" /> Add work experience</a>
-              {this.state.addWork ? <div>{this.renderAddWork()}</div> : null}
-              <div>&nbsp;</div>
-              {/* <div className="list"> */}
                 {this.state.experience.length ?
                 <span>{this.state.experience.map((value, index) => (
-                  <div key={index} className="row profile-section">
+                  <div key={index} className="panel panel-body list">
                     <div className="col-md-2 text-center hidden-xs proj-img">
                       <i className="fa fa-graduation-cap fa-4x" />
                     </div>
@@ -916,16 +764,19 @@ class ProfilePage extends Component {
                       <h4>{value.role} <span id="year">({value.years})</span></h4>
                       <p>{value.description}</p>
                     </div>
-                    {this.state.experience.length === 1 ? null : <hr />}
                   </div>
                 ))}</span> : null}<br />
-                {/* {this.state.addWork ? <div>{this.renderAddWork()}</div> : null} */}
+                {this.state.addWork ? <div>{this.renderAddWork()}</div> : null}
               {/* </div> */}
             </div>
           </div>
 
         </div>
       </div>
+
+      </div>
+
+
     )
   }
 
@@ -948,11 +799,12 @@ class ProfilePage extends Component {
         </div>
       )
     } else {
-      if(!this.state.isEmployer) {
-        return this.renderJobSeekerProfile();
-      } else {
-        return this.renderEmployerProfile();
-      }
+      // if(!this.state.isEmployer) {
+      //   return this.renderJobSeekerProfile();
+      // } else {
+      //   return this.renderEmployerProfile();
+      // }
+      return this.renderProfile();
     }
   }
 }

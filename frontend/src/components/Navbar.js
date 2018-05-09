@@ -51,12 +51,26 @@ class Navbar extends Component {
 
   renderLogoutMenu(){
     return (
-      <nav>
-        <div>
-          <button onClick={() => this.handleRedirect('join')}>Join</button>
-          <button onClick={() => this.handleRedirect('login')}>Login</button>
+      <nav className="navbar navbar-inverse">
+        <div className="container navbar-container">
+          <div className="navbar-header">
+            <button className="btn navbar-toggle collapsed" data-toggle="collapse" data-target="#default-menu" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbr-brand"><img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" style={{width: 70, height: 70}} /></a>
+          </div>
+
+          <div className="collapse navbar-collapse" id="default-menu">
+            <ul className="nav navbar-nav navbar-right">
+              <li><a className="nav-tabs" onClick={() => this.handleRedirect('join')}>Join</a></li>
+              <li><a className="nav-tabs" onClick={() => this.handleRedirect('login')}>Login</a></li>
+            </ul>
+          </div>
         </div>
-      </nav>
+    </nav>
     )
   }
 

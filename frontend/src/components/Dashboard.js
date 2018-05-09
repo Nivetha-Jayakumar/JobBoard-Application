@@ -29,8 +29,6 @@ class Dashboard extends Component {
         // console.log(data);
         if (data !== 404) {
             this.setState({jobs: data});
-        } else {
-          this.setState({error: data})
         }
       }).catch((err) => {
         this.setState({error: err});
@@ -97,26 +95,24 @@ class Dashboard extends Component {
             chooseTab={this.handleTabPage} />
         </div>
 
-        {/* <div className="cover">
-
-        </div> */}
 
         <div className="container dashboard-content">
-          <div className="col-xs-12 panel panel-default text-center success-rate">
+          {/* <div className="col-xs-12 panel panel-default text-center success-rate">
             <div className="panel-heading" id="success-rate-header">Your success rate</div>
             <div className="panel-body" id="show-success-rate"> %</div>
-          </div>
+          </div> */}
 
-          <div className="col-xs-12 panel panel-default col-md-6 applied-jobs gap">
-            <div className="panel-heading text-center" >Jobs posted ({this.state.jobs.length})</div>
-            <div className="panel-body text-center" id="posted-jobs-list">
+          <div className="col-xs-12 panel panel-default col-md-6 gap">
+            <div className="panel-heading text-center" ><h4>Jobs posted</h4></div>
+            <div className="panel-body text-center col-xs-12" id="posted-jobs-list">
               {this.state.jobs.length ?
-                <table className="table table-bordered table-hover col-xs-12">
+                // <div>
+                <table className="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <th className="col-xs-4">Status</th>
-                      <th className="col-xs-4">Job</th>
-                      <th>Applicants</th>
+                      <th className="">Status</th>
+                      <th className="">Job</th>
+                      <th className="">Applicants</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -129,14 +125,14 @@ class Dashboard extends Component {
                       </tr>
                     ))}
                   </tbody>
-                </table> : null
+                </table> : <p className="alert alert-info"><i className="fa fa-info-circle fa-lg" /> You have not posted a job yet.</p>
               }
 
             </div>
           </div>
 
           <div className="col-xs-12 panel panel-default col-md-6 profile-views gap">
-            <div className="panel-heading text-center">Profile views</div>
+            <div className="panel-heading text-center"><h4>Profile views</h4></div>
             <div className="panel-body text-center">To be added</div>
           </div>
 
