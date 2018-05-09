@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
 import SearchBox from './SearchBox';
 import * as API from '../api/API';
@@ -108,7 +108,7 @@ class CompaniesList extends Component{
         {/* {this.state.companies.map((value, index) => ( */}
           <div className="col-sm-4 job-content">
             <div className="panel panel-body job-panel">
-              <span className="col-xs-12 text-center">Image</span>
+              <span className="col-xs-12 text-center"><img src={this.state.searchCompany.image} alt={this.state.searchCompany.name} /></span>
               <span className="col-xs-12 make-center job-post">{this.state.searchCompany.name}</span>
               <span className="col-xs-12 make-center job-company">{this.state.searchCompany.location}</span>
               <hr className="job-separator" />
@@ -143,11 +143,11 @@ class CompaniesList extends Component{
       <div className="">
         <h2 className="text-center">Most followed companies</h2>
         <h3 className="col-xs-12">{this.state.companies.length} companies found</h3>
-        {/* <div className="carousel-inner"> */}
+        <div id="joblist-content">
         {this.state.companies.map((value, index) => (
           <div key={index} className="col-sm-4 job-content item active">
             <div className="panel panel-body job-panel">
-              <span className="col-xs-12 text-center company-logo"><img src={value.image} /></span>
+              <span className="col-xs-12 text-center company-logo"><img src={value.image} alt={value.name} /></span>
               <span className="col-xs-12 make-center job-post">{value.name}</span>
               <span className="col-xs-12 make-center job-company">{value.location}</span>
               <hr className="job-separator" />
@@ -158,7 +158,7 @@ class CompaniesList extends Component{
             </div>
           </div>
         ))}
-      {/* </div> */}
+      </div>
       </div>
     )
   }

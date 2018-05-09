@@ -74,6 +74,25 @@ module.exports = (app, upload) => {
     })
   })
 
+  /********Get all_users_matchin_params_name**********/
+  app.get('/users/:name/:id', (req, res) => {
+    let {name, id} = req.params;
+    // console.log(name);
+    // name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    User.find({
+      _id: {$ne: id},
+      '$or': [
+        {firstname: new RegExp(name, 'i')},
+        {lastname: new RegExp(name, 'i')}
+      ]
+    }, ['firstname', 'lastname', 'company', 'designation', 'skills', 'fb', 'linkedin', 'twitter', 'github', 'blog', 'avatar', 'skills', 'location', 'education', 'experience', 'projects' ]).then((docs) => {
+      // console.log(docs);
+      res.send(docs);
+    }).catch((err) => {
+      res.send(400).status(err);
+    })
+  })
+
   /********POST new_user**********/
   app.post('/users/adduser', (req, res) => {
     // console.log(req.body);
@@ -279,9 +298,9 @@ module.exports = (app, upload) => {
       if (err) {
         return console.log(err);
       }
-      var user = {
-        avatar: response.secure_url
-      }
+      // var user = {
+      //   avatar: response.secure_url
+      // }
 
       User.findByIdAndUpdate(id, {$set: {avatar: response.secure_url}}, {new: true}).then((user) => {
         if (!user) {
@@ -292,6 +311,29 @@ module.exports = (app, upload) => {
         res.send(400).send(err);
       });
     })
+  });
+
+  /********Update user_cover**********/
+  app.post('/users/cover/:id', upload.single('file'), (req, res) => {
+    const {id} = req.params;
+    console.log(id);
+    cloudinary.uploader.upload(req.file.path, (err, response) => {
+      if (err) {
+        return console.log(err);
+      }
+      // var user = {
+      //   avatar: response.secure_url
+      // }
+
+      User.findByIdAndUpdate(id, {$set: {cover: response.secure_url}}, {new: true}).then((user) => {
+        if (!user) {
+          return res.status(404).send();
+        }
+        return res.send({url: response.secure_url});
+      }).catch((err) => {
+        res.send(400).send(err);
+      });
+    });
 
   });
 

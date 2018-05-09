@@ -109,6 +109,9 @@ const userSchema = new mongoose.Schema({
     image: {
       type: String
     },
+    cover: {
+      type: String
+    },
     link: {
       type: String
     }
@@ -158,6 +161,16 @@ const userSchema = new mongoose.Schema({
     status: {
       type: String,
       trim: true
+    }
+  }],
+  messages: [{
+    from: String,
+    to: String,
+    subject: String,
+    message: String,
+    isRead: {
+      type: Boolean,
+      default: false
     }
   }],
   tokens: [{

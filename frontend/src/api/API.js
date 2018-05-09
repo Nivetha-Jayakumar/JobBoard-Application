@@ -245,6 +245,17 @@ export const uploadResume = (file) => {
 
 /***********USERS**************/
 
+export const getAllUsers = (string, id) => {
+  // console.log(string);
+  return fetch(`${url}/users/${string}/${id}`)
+  .then((res) => res.json())
+  .then((resJSON) => {
+    return resJSON;
+  }).catch((err) => {
+    return err;
+  });
+}
+
 export const addUser = (data) => {
   // console.log('In adduser method', data);
   // console.log(data);
@@ -302,7 +313,27 @@ export const uploadImage = (image, id) => {
     body: data
   }).then((res) => {
     // console.log(res.body);
-    return res.status;
+    return res.json();
+  }).then((resJSON) => {
+    return resJSON;
+  }).catch((err) => {
+    return 400;
+  })
+}
+
+export const uploadCover = (image, id) => {
+  const data = new FormData();
+  data.append('file', image);
+  data.append('filename', image.name);
+
+  return fetch(`${url}/users/cover/${id}`, {
+    method: 'POST',
+    body: data
+  }).then((res) => {
+    // console.log(res.body);
+    return res.json()
+  }).then((resJSON) => {
+    return resJSON;
   }).catch((err) => {
     console.log(err);
   })
@@ -397,7 +428,7 @@ export const updateProfile = (userProfile, id) => {
 
   if (userProfile.file) {
     return uploadImage(userProfile.file, id).then((response) => {
-      if (response === 200) {
+      if (response !== 400) {
         return fetch(`${url}/users/updateProfile/${id}`, {
           method: 'PATCH',
           headers: new Headers({

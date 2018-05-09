@@ -16,11 +16,21 @@
 }
 
 .lfg {
-  font-size: 0.5em;
+  font-size: 1.3em;
+}
+
+.lfg > a {
+  color: #bbb;
+  transition: 0.6s all;
+}
+
+.lfg > a:hover {
+  color: #000;
+  transition: 0.6s all;
 }
 
 .profile-content {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 .header {
@@ -33,7 +43,7 @@
 
 .others {
   /* border: 1px solid black; */
-  padding: 0;
+  /* padding: 0; */
 }
 
 .name {
@@ -48,20 +58,15 @@
 
 .name-lfg-edit {
   /* border: 1px solid red; */
-  padding: 0;
+  /* padding: 0; */
 }
 
 .skills, .tags {
-  /* border: 1px solid black; */
   padding: 0
 }
 
-.tags {
-  /* border: 1px solid black; */
-}
-
-.about-job {
-  /* border: 1px solid black; */
+.skills {
+  font-size: 1.2em;
 }
 
 .view-job {
@@ -86,7 +91,7 @@
 .edit {
   font-size: 0.9em;
   /* border: 1px solid black; */
-  padding: 22px 0 22px 45px;
+  /* padding: 22px 0 22px 45px; */
 }
 
 .grad-cap, .grad-univ {
@@ -94,8 +99,17 @@
 }
 
 .list {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 20px;
+  border-color: #eee;
+  transition: 0.6s all;
+}
+
+.list:hover {
+  -webkit-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
+  -moz-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
+  box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
+  transition: 0.6s all;
 }
 
 .body {
@@ -129,15 +143,29 @@ hr {
   font-size: 0.7em;
 }
 
-.job-content {
+.job-content, .profile-content{
   /* border: 1px solid red; */
   padding-left: 15px;
 }
+
+#peoplesearch{
+  border-radius: 6px;
+}
+
+/* #people-panel{
+  transition: 0.6s all;
+} */
 
 .company-logo > img {
   width: 100%;
   height: 100%;
   /* height: 190px; */
+}
+
+.user-avatar > img {
+  width: 50%;
+  height: 50%;
+  border-radius: 80px;
 }
 
 .companylist-content {
@@ -244,6 +272,79 @@ hr {
   font-weight: 500;
 }
 
+.view-gradschool {
+  /* font-size: 20em; */
+}
+
+.profile-section-headers {
+  font-size: 1.5em;
+  color: grey;
+}
+
+.add-cover-image {
+  padding-top: 30px;
+  padding-right: 50px;
+  transition: 0.6s all;
+
+}
+
+.select-btn {
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.6s all;
+  color: gray;
+  /* background-color: #eee; */
+}
+
+input[name='cover-photo'] {
+  display: none;
+}
+
+
+.select-btn:hover {
+  border: 1px solid;
+  background: none;
+  transition: 0.6s all;
+  outline: none;
+  color: black;
+}
+
+.cover-image {
+  /* border: 1px solid black; */
+  height: 180px;
+  z-index: 3;
+  /* background-image: url('red.jpg'); */
+  background-color: #eee;
+  background-position: center;
+  background-size: cover;
+}
+
+.avatar-image {
+  margin-top: -90px;
+  z-index: 2;
+  transition: 0.6s all;
+  /* border: 1px solid red; */
+}
+
+.avatar-image > img {
+  border-radius: 150px;
+  width: 100%;
+  height: 100%;
+  border: 0.5em solid #fff;
+}
+
+.profile-view {
+  /* border: 1px solid black; */
+}
+
+.profile-content {
+  margin-top: 20px;
+  border-color: #eee;
+  transition: 0.6s all;
+}
+
 
 .apply-form {
   border-color: #eee;
@@ -255,6 +356,8 @@ hr {
   /* font-size: 0.8em; */
   /* border: 1px solid blue; */
 }
+
+
 
 .tab-name {
   padding: 0;
@@ -345,11 +448,19 @@ th {
   font-weight: 500;
 }
 
+.user-name {
+  font-weight: 500;
+  font-size: 1.5em;
+  padding: 0;
+  color: #000;
+}
+
 .job-post {
   font-weight: 500;
   font-size: 1.3em;
   padding: 0;
 }
+
 
 .job-company {
   padding: 0;
@@ -362,17 +473,26 @@ th {
   font-weight: 400;
 }
 
-.job-panel {
+.job-panel, .people-panel {
   border-color: #eee;
   transition: 0.6s all;
   line-height: 25px;
 }
 
-.job-panel:hover {
+.job-panel:hover, .people-panel:hover {
   -webkit-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
   -moz-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
   box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
   transition: 0.6s all;
+}
+
+.people-content > a {
+  text-decoration: none;
+
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 .job-separator {
@@ -478,7 +598,7 @@ td > a {
   padding: 0;
 }
 
-#searchbar {
+#searchbar, #peoplesearch {
   width: 100%;
 }
 
@@ -489,6 +609,10 @@ td > a {
 #show-success-rate {
   font-size: 5em;
   font-weight: lighter;
+}
+
+.list, .grad-cap, .grad-univ {
+  /* border: 1px solid black; */
 }
 
 textarea {
@@ -512,7 +636,7 @@ a {
     padding-left: 15px;
   }
 
-  .body {
+  .profile-body {
     padding-bottom: 20px;
   }
 
@@ -544,6 +668,12 @@ a {
   .apply-job-header-content {
     text-align: center;
   }
+  .grad-univ > p {
+    font-size: 0.7em;
+  }
+  .grad-univ > h4 {
+    font-size: 1em;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -569,8 +699,10 @@ a {
     border-right: 0.5px solid #ddd;
   }
 
-  .body {
+  .profile-body {
     padding: 20px;
+    border-color: #eee;
+    transition: 0.6s all;
   }
 
   .about-company {

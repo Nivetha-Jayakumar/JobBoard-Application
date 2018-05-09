@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
 import SearchBox from './SearchBox';
 import * as API from '../api/API';
@@ -124,9 +124,10 @@ class JobsPage extends Component {
 
   renderJobs() {
     return (
-      <div className="">
+      <div id="renderjobs-content">
         <h2 className="text-center">Recent Jobs</h2>
         <h3 className="col-xs-12">{this.state.jobs.length} jobs found</h3>
+        <div id="job-div">
         {this.state.jobs.map((value, index) => (
           <div key={index} className="col-sm-4 job-content">
             <div className="panel panel-body job-panel">
@@ -141,6 +142,7 @@ class JobsPage extends Component {
             </div>
           </div>
         ))}
+      </div>
       </div>
     )
   }

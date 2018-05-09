@@ -20,7 +20,7 @@ class SearchBox extends Component {
 
   componentDidMount() {
     // console.log('Search component mounted');
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   handleSubmit(event) {

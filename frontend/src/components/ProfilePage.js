@@ -11,29 +11,30 @@ class ProfilePage extends Component {
     super(props);
     this.state = this.props.location.state || this.props.match.params;
     this.state.redirect = false;
-    // this.state.file = null;
-    // this.state.editable = false;
-    // this.state.addSkill = false;
-    // this.state.addProject = false;
-    // this.state.addEducation = false;
-    // this.state.addWork = false;
-    // this.state.skillset = {};
-    // this.state.addUniversity = '';
-    // this.state.addMajor = '';
-    // this.state.addDegree = '';
-    // this.state.addGPA = '';
-    // this.state.addAchievements = '';
-    // this.state.gradMonth = 'January';
-    // this.state.gradYear = '2019';
-    // this.state.addTitle = '';
-    // this.state.addDescription = '';
-    // this.state.addRole = '';
-    // this.state.addLink = '';
-    // this.state.addCompany = '';
-    // this.state.addJob = '';
-    // this.state.addJobDesc = '';
-    // this.state.addFromYear = '2017';
-    // this.state.addToYear = 'Present';
+    this.state.file = null;
+    this.state.editable = false;
+    this.state.addSkill = false;
+    this.state.addProject = false;
+    this.state.addEducation = false;
+    this.state.addWork = false;
+    this.state.skillset = {};
+    this.state.addUniversity = '';
+    this.state.addMajor = '';
+    this.state.addDegree = '';
+    this.state.addGPA = '';
+    this.state.addAchievements = '';
+    this.state.gradMonth = 'January';
+    this.state.gradYear = '2019';
+    this.state.addTitle = '';
+    this.state.addDescription = '';
+    this.state.addRole = '';
+    this.state.addLink = '';
+    this.state.addCompany = '';
+    this.state.addJob = '';
+    this.state.addJobDesc = '';
+    this.state.addFromYear = '2017';
+    this.state.addToYear = 'Present';
+
 
     // this.login = this.login.bind(this);
     this.handleIt = this.handleIt.bind(this);
@@ -47,13 +48,14 @@ class ProfilePage extends Component {
     this.handleAddWork = this.handleAddWork.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.gotToEdit = this.gotToEdit.bind(this);
+    this.handleUploadCover = this.handleUploadCover.bind(this);
   }
 
   componentDidMount() {
     // console.log('Profilepage Component Mounted');
     // console.log(this.props.location.state);
-    // console.log(this.state);
-    console.log(this.state);
+    // console.log(this.state.cover);
+    // console.log(this.props.match.params);
   }
 
   handleIt(string) {
@@ -78,29 +80,55 @@ class ProfilePage extends Component {
     })
   }
 
+
   handleTabPage(tab) {
     // console.log('In profile', tab);
-    let profile = this.state.firstname.toLowerCase() + this.state.lastname.toLowerCase();
-    tab = tab.toLowerCase();
-    // console.log(tab);
-    if (tab === 'logout') {
-      API.logout(this.state.tokens[0]).then((response) => {
-        if (response === 200) {
-          this.setState({redirect: true});
-        }
-      }).catch((err) => {
-        console.log(err);
-      })
-    } else if (tab === 'profile') {
-      this.props.history.push({
-        pathname: `/in/${profile}`,
-        state: this.state
-      })
+    if (this.state.data) {
+      let profile = this.state.data.firstname.toLowerCase() + this.state.data.lastname.toLowerCase();
+      // console.log(profile);
+      if (tab === 'logout') {
+        API.logout(this.state.data.tokens[0]).then((response) => {
+          if (response === 200) {
+            this.setState({redirect: true});
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      } else if (tab === 'profile') {
+        this.props.history.push({
+          pathname: `/in/${profile}`,
+          state: this.state.data
+        })
+        // this.setState(this.state.data, () => this.render());
+      } else {
+        this.props.history.push({
+          pathname: `/${tab}`,
+          state: this.state.data
+        })
+      }
     } else {
-      this.props.history.push({
-        pathname: `/${tab}`,
-        state: this.state
-      })
+      let profile = this.state.firstname.toLowerCase() + this.state.lastname.toLowerCase();
+      // tab = tab.toLowerCase();
+      // console.log(tab);
+      if (tab === 'logout') {
+        API.logout(this.state.tokens[0]).then((response) => {
+          if (response === 200) {
+            this.setState({redirect: true});
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      } else if (tab === 'profile') {
+        this.props.history.push({
+          pathname: `/in/${profile}`,
+          state: this.state
+        })
+      } else {
+        this.props.history.push({
+          pathname: `/${tab}`,
+          state: this.state
+        })
+      }
     }
   }
 
@@ -162,6 +190,16 @@ class ProfilePage extends Component {
         console.log(err);
       });
     });
+  }
+
+  handleUploadCover(file) {
+    // console.log(file);
+      API.uploadCover(file, this.state._id).then((response) => {
+        this.setState({cover: response.url})
+        // console.log(response.url);
+      }).catch((err) => {
+        console.log(err);
+      })
   }
 
   handleAddEducation(event) {
@@ -489,113 +527,88 @@ class ProfilePage extends Component {
 
   renderViewProfile() {
     return (
-      <div className="container">
-        <div className="navbar">
-          <Navbar
-            onSearch={this.handleIt}
-            status={this.state.isLoggedIn}
-            data={this.props.location.state}
-            chooseTab={this.handleTabPage} />
-        </div>
-
-        <div>
-
-        </div>
+      <div>
+      <div className="navbar">
+        <Navbar
+          onSearch={this.handleIt}
+          status={this.state.data.isLoggedIn}
+          data={this.props.location.state.data}
+          chooseTab={this.handleTabPage} />
       </div>
-    )
-  }
 
 
+      <div className="profile-view container">
 
-  renderJobSeekerProfile() {
-    return (
-      <div className="container">
-        <div className="navbar">
-          <Navbar
-            onSearch={this.handleIt}
-            status={this.state.isLoggedIn}
-            data={this.props.location.state}
-            type={this.props.location.state.isEmployer}
-            chooseTab={this.handleTabPage} />
-        </div>
+        <div className="container panel panel-body profile-content">
 
-        {/* <div className="cover">
-
-        </div> */}
-        {/* <br /> */}
-
-        <div className="container profile-content">
-
-          <div className="row header">
-            <div className="col-md-4 make-center text-right image">
+            <div className="text-center avatar-image">
               <img
                 className="avatar"
-                src={this.state.avatar}
-                alt={this.state.firstname}
-                style={{width: 200}}
+                src={this.state.profile.avatar}
+                alt={this.state.profile.firstname}
+                style={{width: 260}}
               />
             </div>
-            <div className="col-md-8 others">
-              <div className="col-md-12 make-center name-lfg-edit">
-                <div className="col-md-10 name-lfg"><h2 className="name">{this.state.firstname} {this.state.lastname} &nbsp; <span className="lfg">{this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</span></h2></div>
-                {/* <div className="col-md-2 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-linkedin" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</div> */}
-                {/* <div className="col-md-1 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-facebook-f" /> : null}</div> */}
-                <div className="col-md-2 hidden-xs pull-right edit"><a onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a></div>
-                 {/* {this.state.linkedin ? <i className="fa fa-linkedin col-xs-12 col-md-2" /> : null} */}
-                  {/* <a className="col-md-2 col-md-offset-3 hidden-xs pull-right edit" onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a> */}
-                {/* </h2> */}
-              </div>
-
-
-              <div className="col-md-12 col-xs-12 make-center skills">
-                <br />
-                {this.state.experience.length ? <p>Worked at {this.state.experience.company}</p> : null}
-                {this.state.skills ?
-                  <p>Experience with {this.state.skills}</p> :
-                  <a onClick={(event) => this.setState({addSkill: true})}>+ Add a skill</a>}<br />
-                {this.state.addSkill ? <textarea className="col-xs-6 form-control" cols="50" rows="3" placeholder="Enter skills separated by comma" onChange={(event) => this.setState({skillset: event.target.value})}/> : null}
-                {this.state.addSkill ? <div><a onClick={(event) => this.setState({addSkill: false})}>Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;<Button className="btn btn-xs btn-primary" onClick={this.handleUpdateSkills}>Save</Button></div> : null}<br />
-              </div>
-
-              <div className="col-md-12 col-xs-12 make-center tags">
-                {this.state.designation !== 'N/A' ? <p className="tags col-xs-4"><i className="fa fa-suitcase" /> {this.state.designation}</p> : null}
-                {this.state.location ? <p className="tags col-xs-4"><i className="fa fa-map-marker" /> {this.state.location}</p> : null}
-                {this.state.education.length ? <p className="tags col-xs-4"><i className="fa fa-graduation-cap" /> {this.state.education[0].university}</p> : null}
-              </div>
-
+            <div className="text-center profile-name">
+                  <h2 className="col-xs-12 name">{this.state.profile.firstname} {this.state.profile.lastname}</h2>
+                  <span className="lfg">{this.state.profile.linkedin ? <a href={this.state.profile.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} {this.state.profile.fb ? <a href={this.state.profile.fb} target='_blank'><i className="fa fa-facebook-f" /></a> : null} {this.state.profile.github ? <i className="fa fa-github" /> : null}</span>
             </div>
+
+
+            <div className="text-center skills">
+                {this.state.profile.experience.length ? <p>Worked at {this.state.profile.experience[0].company}</p> : null}
+                {this.state.profile.skills ? <p>Experience working with {this.state.profile.skills}</p> : null}
+            </div>
+
           </div>
 
-          <br /><br /><hr /><br /><br />
+          <hr />
+          <div className="panel panel-body profile-body">
 
-          <div className="body">
+          {this.state.profile.experience.length ?
+          <div id="experience">
+            <h4 className="make-center profile-section-headers">EXPERIENCE</h4><br />
+            <div className="">
+              <span>{this.state.profile.experience.map((value, index) => (
+                <div key={index} className="col-xs-12 panel panel-body list">
+                  <div className="col-md-2 text-center hidden-xs proj-img">
+                    <i className="fa fa-graduation-cap fa-4x" />
+                  </div>
+                  <div className="col-md-6 col-xs-12 proj-desc">
+                    <p>{value.company}</p>
+                    <h4>{value.role}</h4>
+                  </div>
+                  <br />
+                </div>
+              ))}</span>
+            </div>
+          </div> : null }
+
+
+            {this.state.profile.education.length ?
             <div id="education">
-              <h4>EDUCATION</h4><br />
-              <div className="list">
-                {this.state.education.length ?
-                  <span>{this.state.education.map((value, index) => (
-                    <div key={index} className="row">
+              <h4 className="make-center profile-section-headers">EDUCATION</h4><br />
+              <div className="">
+                  <span>{this.state.profile.education.map((value, index) => (
+                    <div key={index} className="col-xs-12 panel panel-body list">
                       <div className="col-md-2 text-center hidden-xs grad-cap">
                         <i className="fa fa-graduation-cap fa-4x" />
                       </div>
                       <div className="col-md-6 col-xs-12 grad-univ">
-                        <p>{value.university.toUpperCase()} . {value.gradDate.toUpperCase()}</p>
-                        <p>{value.degree}, {value.major}</p>
-                        <p>GPA: {value.gpa}</p>
-                        <p>{value.achievements}</p>
+                        <p>{value.university.toUpperCase()} · {value.gradDate.toUpperCase()}</p>
+                        <h4>{value.degree}, {value.major}</h4>
                       </div>
-                      <hr />
+                      <div>&nbsp;</div>
                     </div>
-                  ))}</span> : <a onClick={(event) => this.setState({addEducation: true})}><i className="fa fa-plus-square-o"/> Add an education</a>}<br />
-                  {this.state.addEducation ? <div>{this.renderAddEducation()}</div> : null}
+                  ))}</span>
               </div>
-            </div><br />
+            </div> : null }<br />
 
+            {this.state.profile.projects.length ?
             <div id="projects">
-              <h4>PROJECTS</h4><br />
-              <div className="list">
-                {this.state.projects.length ?
-                <span>{this.state.projects.map((value, index) => (
+              <h4 className="make-center profile-section-headers">PROJECTS</h4><br />
+              <div className="panel panel-body list">
+                <span>{this.state.profile.projects.map((value, index) => (
                   <div key={index} className="row">
                     <div className="col-md-2 text-center hidden-xs proj-img">
                       <i className="fa fa-graduation-cap fa-4x" />
@@ -606,13 +619,147 @@ class ProfilePage extends Component {
                       <p>{value.role}</p>
                     </div>
                   </div>
-                ))}</span> : <a onClick={(event) => this.setState({addProject: true})}><i className="fa fa-plus-square-o"/> Add a project</a>}<br />
-                {this.state.addProject ? <div>{this.renderAddProject()}</div> : null}
+                ))}</span>
               </div>
+            </div> : null }<br />
+
+          </div>
+
+        </div>
+      </div>
+    )
+  }
+
+
+
+  renderJobSeekerProfile() {
+    return (
+      <div>
+      <div className="navbar">
+        <Navbar
+          onSearch={this.handleIt}
+          status={this.state.isLoggedIn}
+          data={this.props.location.state}
+          type={this.props.location.state.isEmployer}
+          chooseTab={this.handleTabPage} />
+      </div>
+
+      <div className="cover-image" style={{backgroundImage: `url(${this.state.cover})`}}>
+        {this.state.cover ? null : <span className="hidden-sm pull-right add-cover-image">
+          <label className="select-btn">
+            <i className="fa fa-plus-square-o" /> Add cover photo
+            <input type="file" name="cover-photo" onChange={(event) => this.handleUploadCover(event.target.files[0])} />
+          </label>
+        </span>}
+
+      </div>
+
+      <div className="profile-view container">
+
+        <div className="container panel panel-body profile-content">
+
+          <div className="text-center avatar-image">
+            <img
+              className="avatar"
+              src={this.state.avatar}
+              alt={this.state.firstname}
+              style={{width: 260}}
+            />
+          </div>
+
+          <div className="text-center profile-name">
+              <h2 className="col-xs-12 name">{this.state.firstname} {this.state.lastname}</h2>
+              <span className="lfg">
+                {this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null}
+                {this.state.fb ? <a href={this.state.fb} target='_blank'><i className="fa fa-facebook-f" /></a> : null}
+                {this.state.github ? <i className="fa fa-github" /> : null}
+              </span>
+          </div>
+            {/* <div className="col-md-8 others">
+              <div className="col-md-12 make-center name-lfg-edit">
+                <div className="col-md-10 name-lfg"><h2 className="name">{this.state.firstname} {this.state.lastname} &nbsp; <span className="lfg">{this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</span></h2></div> */}
+                {/* <div className="col-md-2 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-linkedin" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-facebook-f" /> : null} &nbsp; {this.state.linkedin ? <i className="fa fa-github" /> : null}</div> */}
+                {/* <div className="col-md-1 col-xs-12 lfg">{this.state.linkedin ? <i className="fa fa-facebook-f" /> : null}</div> */}
+                {/* <div className="col-md-2 hidden-xs pull-right edit"><a onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a></div> */}
+                 {/* {this.state.linkedin ? <i className="fa fa-linkedin col-xs-12 col-md-2" /> : null} */}
+                  {/* <a className="col-md-2 col-md-offset-3 hidden-xs pull-right edit" onClick={this.handleEditProfile}>Edit <i className="fa fa-pencil-square-o"/></a> */}
+                {/* </h2> */}
+              {/* </div> */}
+
+
+              <div className="text-center skills">
+                <br />
+                {/* {this.state.experience.length ? <p>Worked at {this.state.experience.company}</p> : null} */}
+                {this.state.about ? <p>{this.state.about}</p> : null}
+                {this.state.skills ?
+                  <p>Experience with {this.state.skills}</p> :
+                  <a onClick={(event) => this.setState({addSkill: true})}>+ Add a skill</a>}<br />
+                {this.state.addSkill ? <textarea className="col-xs-6 form-control" cols="50" rows="3" placeholder="Enter skills separated by comma" onChange={(event) => this.setState({skillset: event.target.value})}/> : null}
+                {this.state.addSkill ? <div><a onClick={(event) => this.setState({addSkill: false})}>Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;<Button className="btn btn-xs btn-primary" onClick={this.handleUpdateSkills}>Save</Button></div> : null}<br />
+              </div>
+
+              <div className="text-center tags">
+                {this.state.designation !== 'N/A' ? <p className="tags col-xs-4"><i className="fa fa-suitcase" /> {this.state.designation}</p> : null}
+                {this.state.location ? <p className="tags col-xs-4"><i className="fa fa-map-marker" /> {this.state.location}</p> : null}
+                {this.state.education.length ? <p className="tags col-xs-4"><i className="fa fa-graduation-cap" /> {this.state.education[0].university}</p> : null}
+              </div>
+              <br />
+              <span className="pull-right make-center edit">
+                <a onClick={this.handleEditProfile}>Edit profile <i className="fa fa-pencil-square-o"/></a>
+              </span>
+
+            </div>
+          {/* </div> */}
+
+          <hr />
+
+          <div className=" panel panel-body profile-body">
+            <div id="education">
+              <h4 className="profile-section-headers">EDUCATION</h4><br />
+              <a onClick={(event) => this.setState({addEducation: true})}><i className="fa fa-plus-square-o"/> Add an education</a>
+                {this.state.education.length ?
+                  // <div className="list">
+                  <span>
+                    {this.state.education.map((value, index) => (
+                    <div key={index} className="panel panel-body list">
+                      <div className="col-xs-2 text-center grad-cap">
+                        <i className="fa fa-graduation-cap fa-2x" />
+                      </div>
+                      <div className="col-xs-10 grad-univ">
+                        <p className="view-gradschool">{value.university.toUpperCase()} · {value.gradDate.toUpperCase()}</p>
+                        <h4>{value.degree}, {value.major}</h4>
+                        <p>GPA: {value.gpa}</p>
+                        <p>{value.achievements}</p>
+                      </div>
+                    </div>
+                  ))}</span> : null}<br />
+                  {this.state.addEducation ? <div>{this.renderAddEducation()}</div> : null}
+
+            </div><br />
+
+            <div id="projects">
+              <h4 className="profile-section-headers">PROJECTS</h4><br />
+              <a onClick={(event) => this.setState({addProject: true})}><i className="fa fa-plus-square-o"/> Add a project</a>
+              {/* <div className="list"> */}
+                {this.state.projects.length ?
+                <span>{this.state.projects.map((value, index) => (
+                  <div key={index} className="panel panel-body list">
+                    <div className="col-md-2 text-center hidden-xs proj-img">
+                      <i className="fa fa-graduation-cap fa-4x" />
+                    </div>
+                    <div className="col-md-6 col-xs-12 proj-desc">
+                      <h4>{value.title} &nbsp; {value.link ? <a href={value.link} target="_blank"><i className="fa fa fa-share-square-o"/></a> : null}</h4>
+                      <p>{value.description}</p>
+                      <p>{value.role}</p>
+                    </div>
+                  </div>
+                ))}</span> : null}<br />
+                {this.state.addProject ? <div>{this.renderAddProject()}</div> : null}
+              {/* </div> */}
             </div><br />
 
             <div id="experience">
-              <h4>EXPERIENCE</h4><br />
+              <h4 className="profile-section-headers">EXPERIENCE</h4><br />
               <div className="list">
                 {this.state.experience.length ?
                 <span>{this.state.experience.map((value, index) => (
@@ -634,8 +781,9 @@ class ProfilePage extends Component {
 
         </div>
 
-
       </div>
+
+
     )
   }
 
@@ -788,7 +936,9 @@ class ProfilePage extends Component {
     }
 
     if (this.state.profile) {
-      return this.renderViewProfile();
+      return (
+        this.renderViewProfile()
+      )
     }
 
     if (!this.state.isLoggedIn) {

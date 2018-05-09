@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import ProfilePage from './components/ProfilePage';
 import EditProfile from './components/EditProfile';
+import People from './components/People';
 import Dashboard from './components/Dashboard';
 import Recruit from './components/Recruit';
 // import Profile from './components/Profile';
@@ -202,6 +203,7 @@ class App extends Component {
           <Route exact path="/postajob" component={PostAJob} />
           <Route exact path="/applyjob" component={ApplyJob} />
           <Route exact path="/recruit" component={Recruit} />
+          <Route exact path="/people" component={People} />
 
           <Route exact path='/companies' component={CompaniesList} />
 
