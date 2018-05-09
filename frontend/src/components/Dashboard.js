@@ -9,6 +9,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       emailID: this.props.location.state.email,
+      views: this.props.location.state.views,
       jobs: [],
       error: '',
       isHidden: true,
@@ -21,7 +22,7 @@ class Dashboard extends Component {
   }
 
   componentWillMount(){
-    console.log(this.props.location.state);
+    // console.log(this.props.location.state);
     // this.setState({isHidden: false});
     // console.log(this.state);
     if (this.state.isEmployer) {
@@ -133,7 +134,7 @@ class Dashboard extends Component {
 
           <div className="col-xs-12 panel panel-default col-md-6 profile-views gap">
             <div className="panel-heading text-center"><h4>Profile views</h4></div>
-            <div className="panel-body text-center">To be added</div>
+            <div className="panel-body text-center"><p>{this.state.views}</p></div>
           </div>
 
           <div id="rejects">
@@ -200,12 +201,12 @@ class Dashboard extends Component {
 
           <div className="container dashboard-content">
             <div className="col-xs-12 panel panel-default text-center success-rate">
-              <div className="panel-heading" id="success-rate-header">Your success rate</div>
+              <div className="panel-heading" id="success-rate-header"><h4>Your projected success rate</h4></div>
               <div className="panel-body" id="show-success-rate">{success_rate} %</div>
             </div>
 
             <div className="col-xs-12 panel panel-default col-md-6 applied-jobs gap">
-              <div className="panel-heading text-center" >Jobs applied</div>
+              <div className="panel-heading text-center" ><h4>Jobs applied</h4></div>
               <div className="panel-body text-center" id="jobs-list">
                 {this.state.jobs.length ?
                   <span>
@@ -223,8 +224,8 @@ class Dashboard extends Component {
             </div>
 
             <div className="col-xs-12 panel panel-default col-md-6 pull-right profile-views gap">
-              <div className="panel-heading text-center">Profile views</div>
-              <div className="panel-body text-center">To be added</div>
+              <div className="panel-heading text-center"><h4>Profile views</h4></div>
+              <div className="panel-body text-center views"><p>{this.state.views}</p></div>
             </div>
 
             {/* <div id="rejects">

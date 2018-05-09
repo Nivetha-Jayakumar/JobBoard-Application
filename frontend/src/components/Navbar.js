@@ -60,13 +60,13 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbr-brand"><img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" style={{width: 70, height: 70}} /></a>
+            <a className="navbr-brand"><img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 70, height: 70}} /></a>
           </div>
 
           <div className="collapse navbar-collapse" id="default-menu">
             <ul className="nav navbar-nav navbar-right">
-              <li><a className="nav-tabs" onClick={() => this.handleRedirect('join')}>Join</a></li>
-              <li><a className="nav-tabs" onClick={() => this.handleRedirect('login')}>Login</a></li>
+              <li><a className="nav-tabs" onClick={() => this.handleTabs('join')}>Join</a></li>
+              <li><a className="nav-tabs" onClick={() => this.handleTabs('login')}>Login</a></li>
             </ul>
           </div>
         </div>

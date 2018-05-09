@@ -313,6 +313,34 @@ module.exports = (app, upload) => {
     })
   });
 
+  /********Update user_views**********/
+  app.get('/updateviews/:id', (req, res) => {
+    const {id} = req.params;
+    // console.log(id);
+    User.findByIdAndUpdate(id, {$inc: {views: 1}}, {new: true}).then((doc) => {
+      res.status(200).send();
+    }).catch((err) => {
+      res.status(400).send();
+    })
+  });
+
+  /********Send messages**********/
+  app.post('/sendmessage/:id', (req, res) => {
+    // console.log(req.body, req.params);
+    const {id} = req.params;
+
+    User.findByIdAndUpdate(id, {$push: {
+      messages: {
+      $each: [req.body],
+      $position: 0
+    }
+    }}, {new: true}).then((doc) => {
+      res.send(doc);
+    }).catch((err) => {
+      res.statusd(400).send();
+    });
+  })
+
   /********Update user_cover**********/
   app.post('/users/cover/:id', upload.single('file'), (req, res) => {
     const {id} = req.params;
@@ -362,6 +390,7 @@ module.exports = (app, upload) => {
 
   app.post('/users/login', (req, res) => {
     var {email, password} = req.body;
+    // console.log(email, password);
 
     User.findByCredentials(email, password).then((user) => {
       // console.log(user);

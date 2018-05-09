@@ -446,43 +446,43 @@ class CompanyPage extends Component {
               <p><i className="fa fa-map-marker" /> {this.state.company.location}</p>
             </div>
             <br />
-            <div className="col-xs-10 col-md-10 col-xs-offset-1 tabs">
+            <div className="col-xs-10 col-xs-offset-1 tabs">
 
-              <div className="col-xs-2 col-md-2 col-xs-offset-1 tab" onClick={() => this.handleSections('overview')}>
+              <div className="col-xs-2 col-xs-offset-1 tab" id="overview" onClick={() => this.handleSections('overview')}>
                 <div className="col-xs-12 icon">
-                  <i className="fa fa-camera-retro fa-lg" />
+                  <i className="fa fa-camera-retro fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Overview</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" onClick={() => this.handleSections('jobs')}>
+              <div className="col-xs-2 col-md-2 tab" id="jobs" onClick={() => this.handleSections('jobs')}>
                 <div className="col-xs-12 icon">
-                  <i className="fa fa-suitcase fa-lg" />
+                  <i className="fa fa-suitcase fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Jobs</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" onClick={() => this.handleSections('reviews')}>
+              <div className="col-xs-2 col-md-2 tab" id="reviews" onClick={() => this.handleSections('reviews')}>
                 <div className="col-xs-12 icon">
-                  <i className="fa fa-eye fa-lg" />
+                  <i className="fa fa-eye fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Reviews</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" onClick={() => this.handleSections('writereview')}>
+              <div className="col-xs-2 col-md-2 tab" id="writereview" onClick={() => this.handleSections('writereview')}>
                 <div className="col-xs-12 icon">
-                  <i className="fa fa-pencil-square-o fa-lg" />
+                  <i className="fa fa-pencil-square-o fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Post a review</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" onClick={() => this.handleSections('photos')}>
+              <div className="col-xs-2 col-md-2 last-tab tab" id="photos" onClick={() => this.handleSections('photos')}>
                 <div className="col-xs-12 icon">
-                  <i className="fa fa-pencil-square-o fa-lg" />
+                  <i className="fa fa-pencil-square-o fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Photos</p>
@@ -491,7 +491,6 @@ class CompanyPage extends Component {
 
             </div>
           </div>
-          <div>&nbsp;</div>
 
           {this.state.section === 'overview' ? this.renderOverview() : null}
           {this.state.section === 'jobs' ? this.renderJobs() : null}

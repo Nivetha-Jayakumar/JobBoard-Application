@@ -22,6 +22,7 @@
 .lfg > a {
   color: #bbb;
   transition: 0.6s all;
+  text-decoration: none;
 }
 
 .lfg > a:hover {
@@ -65,9 +66,40 @@
   padding: 0
 }
 
+.send-message > button {
+  color: #fff;
+  background-color: #d42525;
+  transition: 0.6s all;
+}
+
+.send {
+  color: #fff;
+  background-color: #d42525;
+  transition: 0.6s all;
+}
+
+.send:hover {
+  color: #d42525;
+  transition: 0.6s all;
+  border-color: #d42525;
+  background-color: #fff;
+}
+
+.send-message {
+  transition: 0.6s all;
+}
+
+.send-message > button:hover {
+  color: #d42525;
+  transition: 0.6s all;
+  border-color: #d42525;
+  background-color: #fff;
+}
+
 .skills {
   font-size: 1.2em;
 }
+
 
 .view-job {
   font-size: 0.5em;
@@ -124,6 +156,7 @@
 
 .edit-profile-content {
   padding-bottom: 100px;
+  border-color: #ddd;
 }
 
 .personal, .links {
@@ -177,7 +210,10 @@ hr {
 
 #companypage {
   padding-top: 15px;
+  padding-bottom: 20px;
 }
+
+
 
 .user-avatar > img {
   width: 50%;
@@ -416,7 +452,7 @@ th {
   /* border: 1px solid black; */
   /* padding-left: 15px; */
   padding: 0;
-  /* height: 200px; */
+  height: 300px;
 }
 
 .nav-tabs {
@@ -428,8 +464,97 @@ th {
   /* border: 1px solid; */
 }
 
+.footer {
+  background-color: #425c87;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.login-form {
+  /* padding: 60px; */
+  padding: 20px 20px 60px 20px;
+  border-color : #bbb;
+  -webkit-box-shadow: 10px 10px 153px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 153px -5px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 153px -5px rgba(0,0,0,0.75);
+}
+
+.login-input > input{
+  border-right: none;
+  transition: 0.6s all;
+  /* border: none; */
+  /* width: 100%; */
+}
+
+.login-image > img, .signup-image > img{
+  border-radius: 200px;
+}
+
+#choose {
+  cursor: pointer;
+  border: 1px solid #d42525;
+  color: #d42525;
+  font-weight: 400;
+  transition: 0.6s all;
+  padding: 8px;
+  font-size: 1em;
+}
+
+#choose:hover {
+  background-color: #d42525;
+  color: white;
+  transition: 0.6s all;
+}
+
+#signup-container {
+  /* border: 2px solid black; */
+  margin-top: -20px;
+  /* height: 100vh; */
+}
+
+#login-container, #signup-container  {
+  margin-top: -20px;
+  margin-bottom: -10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 25px;
+  /* border: 2px solid red; */
+}
+
+#signup-main {
+  /* margin-top: -20px; */
+}
+
+#signup-link {
+  color: #d42525;
+}
+
+.login-btn {
+  background-color: white;
+  border: 1px solid #d42525;
+  color: #d42525;
+  transition: 0.6s all;
+}
+
+.login-btn:hover {
+  transition: 0.6s all;
+  color: white;
+  /* font-weight: 800; */
+  background-color: #d42525;
+}
+
+.input-group-addon {
+  background-color: white;
+  /* border: none; */
+  color: #d42525;
+}
+
 #home-page, #home-page-content {
   /* border: 1px solid; */
+}
+
+#home-page-content {
+  transition: 0.6s all;
 }
 
 #highlight {
@@ -437,13 +562,20 @@ th {
   color: #d42525;
 }
 
+#about-page {
+  padding: 50px 0;
+  /* background-color: red; */
+}
+
 #home-page-header {
   padding: 170px 0;
   /* height: 100vh; */
+  /* border: 3px solid red; */
 }
 
 #home-page-working {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  padding-bottom: 40px;
 }
 
 #home-page-working > h5 {
@@ -451,12 +583,46 @@ th {
 }
 
 .how-to-icon {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   /* font-size: 4em; */
-  color: #d42525;
-  /* padding: 20px; */
-  border-radius: 300px;
+  /* color: #d42525; */
+  /* border-radius: 75px; */
+  /* padding: 45px; */
 }
+
+
+.how-to-icon > i {
+  border: 4px dashed #d42525;
+  padding: 49px 53px;
+  font-size: 4.3em;
+  color: #d42525;
+  border-radius: 200px;
+}
+
+.how-to > div > p {
+  color: gray;
+  font-weight: 500;
+}
+
+#site-stats {
+  /* border: 1px solid black; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  padding: 40px;
+}
+
+#need-help {
+  background-color: #f7f7f7;
+  padding: 70px 0;
+}
+
+#need-help-box > input {
+  width: 80%;
+}
+
+
 
 /* .navbar-container > a > img {
   width: 100%;
@@ -519,6 +685,11 @@ th {
   background-color: #f7f7f7;
 }
 
+.edit-profile {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
 .main {
   /* padding-top: 20px; */
 }
@@ -545,16 +716,16 @@ th {
   border-radius: 15px;
   font-size: 0.8em;
   background-color: white;
-  color: #fb236a;
+  color: #d42525;
   font-weight: 400;
-  border-color: #fb236a;
+  border-color: #d42525;
   transition: 0.6s all;
   padding: 5px 10px;
   outline: none;
 }
 
 .apply-btn:hover {
-  background-color: #fb236a;
+  background-color: #d42525;
   transition: 0.6s all;
   color: white;
   font-weight: 500;
@@ -589,6 +760,11 @@ th {
   border-color: #eee;
   transition: 0.6s all;
   line-height: 25px;
+}
+
+.message-panel {
+  border-color: #eee;
+  transition: 0.6s all;
 }
 
 .job-panel:hover, .people-panel:hover {
@@ -674,11 +850,31 @@ td > a {
   font-size: 0.7em;
 }
 
-.tab:hover {
-  background-color: #ccc;
+.tab:hover, .tab-active {
+  background-color: #d42525;
+  color: white;
+  font-weight: 800;
   transition: 0.7s all;
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
   cursor: pointer;
+}
+
+.views > p {
+  font-size: 8em;
+}
+
+.about-company-content {
+  padding-top: 40px;
+  /* border: 1px solid black; */
+}
+
+.tab {
+  border-right: 0.5px solid #ddd;
+  transition: 0.6s all;
+}
+
+.last-tab {
+  border: none;
 }
 
 .reviews {
@@ -786,15 +982,30 @@ a {
   .grad-univ > h4 {
     font-size: 1em;
   }
+
 }
 
 @media only screen and (max-width: 768px) {
   .apply-job-header-content {
     text-align: center;
   }
+  .each {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .stat {
+    border-bottom: 4px dashed white;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .stat {
+    border-right: 4px dashed white;
+  }
 }
 
 @media only screen and (min-width: 641px) {
+
   .name {
     padding: 0px;
   }

@@ -9,7 +9,7 @@ import '../App.css';
 class ProfilePage extends Component {
   constructor(props){
     super(props);
-    this.state = this.props.location.state || this.props.match.params;
+    this.state = this.props.location.state;
     this.state.redirect = false;
     this.state.file = null;
     this.state.editable = false;
@@ -34,6 +34,8 @@ class ProfilePage extends Component {
     this.state.addJobDesc = '';
     this.state.addFromYear = '2017';
     this.state.addToYear = 'Present';
+    this.state.sendMessage = false;
+    this.state.message = '';
 
 
     // this.login = this.login.bind(this);
@@ -49,11 +51,13 @@ class ProfilePage extends Component {
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.gotToEdit = this.gotToEdit.bind(this);
     this.handleUploadCover = this.handleUploadCover.bind(this);
+    this.handleSendMessage = this.handleSendMessage.bind(this);
   }
 
   componentDidMount() {
     // console.log('Profilepage Component Mounted');
     // console.log(this.props.location.state);
+    // console.log(this.state);
     // console.log(this.state.cover);
     // console.log(this.props.match.params);
   }
@@ -78,6 +82,23 @@ class ProfilePage extends Component {
     }).catch((err) => {
       console.log(err);
     })
+  }
+
+  handleSendMessage(event) {
+    event.preventDefault();
+    this.setState({sendMessage: false});
+
+    // console.log(this.state.message);
+    // console.log(this.state.profile.firstname);
+    // console.log(this.state.data.firstname);
+    let data = {
+      from: this.state.data.firstname + ' ' + this.state.data.lastname,
+      to: this.state.profile.firstname + ' ' + this.state.profile.lastname,
+      message: this.state.message
+    }
+    // console.log(data);
+
+    API.sendMessage(data, this.state.profile._id);
   }
 
 
@@ -335,7 +356,7 @@ class ProfilePage extends Component {
             </select>
           </div>
           <div className="col-sm-2 col-xs-6">
-             <select value="2019" className="form-control" onChange={(event) => this.setState({gradYear: event.target.value})}>
+             <select value={this.state.gradYear} className="form-control" onChange={(event) => this.setState({gradYear: event.target.value})}>
                <option value="2022">2022</option>
                <option value="2021">2021</option>
                <option value="2020">2020</option>
@@ -528,12 +549,16 @@ class ProfilePage extends Component {
   renderViewProfile() {
     return (
       <div>
-      <div className="navbar">
+      <div className="container navbar">
         <Navbar
           onSearch={this.handleIt}
           status={this.state.data.isLoggedIn}
           data={this.props.location.state.data}
           chooseTab={this.handleTabPage} />
+      </div>
+
+      <div className="cover-image" style={{backgroundImage: `url(${this.state.profile.cover})`}}>
+
       </div>
 
 
@@ -551,14 +576,42 @@ class ProfilePage extends Component {
             </div>
             <div className="text-center profile-name">
                   <h2 className="col-xs-12 name">{this.state.profile.firstname} {this.state.profile.lastname}</h2>
-                  <span className="lfg">{this.state.profile.linkedin ? <a href={this.state.profile.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null} {this.state.profile.fb ? <a href={this.state.profile.fb} target='_blank'><i className="fa fa-facebook-f" /></a> : null} {this.state.profile.github ? <i className="fa fa-github" /> : null}</span>
+                  <span className="lfg">
+                    {this.state.profile.linkedin ? <a href={this.state.profile.linkedin} target='_blank'><i className="fa fa-linkedin" />&nbsp;&nbsp;</a> : null}
+                    {this.state.profile.fb ? <a href={this.state.profile.fb} target='_blank'><i className="fa fa-facebook-f" />&nbsp;&nbsp;</a> : null}
+                    {this.state.profile.github ? <a href={this.state.profile.github} target="_blank"><i className="fa fa-github" />&nbsp;&nbsp;</a> : null}</span>
             </div>
 
-
+            <br />
             <div className="text-center skills">
                 {this.state.profile.experience.length ? <p>Worked at {this.state.profile.experience[0].company}</p> : null}
                 {this.state.profile.skills ? <p>Experience working with {this.state.profile.skills}</p> : null}
             </div>
+            <br />
+
+            <br /><br />
+            {this.state.sendMessage ?
+              <div className="col-md-6 col-md-offset-3 message-panel">
+                  <div className="col-xs-12">
+                    <textarea
+                      className="form-control input-lg"
+                      placeholder="Message"
+                      rows="6"
+                      autoFocus
+                      onChange={(event) => this.setState({message: event.target.value})}
+                     />
+                   </div>
+                   <div>&nbsp;</div>
+                   <div className="col-xs-12">
+                     <a onClick={() => this.setState({sendMessage: false})}>Cancel</a>&nbsp;&nbsp;
+                     <button className="btn btn-md send" onClick={this.handleSendMessage}>Send</button>
+                   </div>
+              </div> :
+              <div className="text-center send-message">
+                <button className="btn btn-lg" onClick={() => this.setState({sendMessage: true})}>
+                  <i className="fa fa-paper-plane" /> Send a message
+                </button>
+              </div>}
 
           </div>
 
@@ -607,14 +660,14 @@ class ProfilePage extends Component {
             {this.state.profile.projects.length ?
             <div id="projects">
               <h4 className="make-center profile-section-headers">PROJECTS</h4><br />
-              <div className="panel panel-body list">
+              <div className="">
                 <span>{this.state.profile.projects.map((value, index) => (
-                  <div key={index} className="row">
+                  <div key={index} className="col-xs-12 panel panel-body list">
                     <div className="col-md-2 text-center hidden-xs proj-img">
                       <i className="fa fa-graduation-cap fa-4x" />
                     </div>
                     <div className="col-md-6 col-xs-12 proj-desc">
-                      <p>{value.title} &nbsp; <a href={value.link} target="_blank"><i className="fa fa fa-share-square-o"/></a></p>
+                      <h4>{value.title} &nbsp; <a href={value.link} target="_blank"><i className="fa fa fa-share-square-o"/></a></h4>
                       <p>{value.description}</p>
                       <p>{value.role}</p>
                     </div>
@@ -635,7 +688,7 @@ class ProfilePage extends Component {
   renderProfile() {
     return (
       <div>
-      <div className="navbar">
+      <div className="container navbar">
         <Navbar
           onSearch={this.handleIt}
           status={this.state.isLoggedIn}
@@ -651,7 +704,6 @@ class ProfilePage extends Component {
             <input type="file" name="cover-photo" onChange={(event) => this.handleUploadCover(event.target.files[0])} />
           </label>
         </span>}
-
       </div>
 
       <div className="main">
@@ -671,9 +723,9 @@ class ProfilePage extends Component {
           <div className="text-center profile-name">
               <h2 className="col-xs-12 name">{this.state.firstname} {this.state.lastname}</h2>
               <span className="lfg">
-                {this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" /></a> : null}
-                {this.state.fb ? <a href={this.state.fb} target='_blank'><i className="fa fa-facebook-f" /></a> : null}
-                {this.state.github ? <i className="fa fa-github" /> : null}
+                {this.state.linkedin ? <a href={this.state.linkedin} target='_blank'><i className="fa fa-linkedin" />&nbsp;&nbsp;</a> : null}
+                {this.state.fb ? <a href={this.state.fb} target='_blank'><i className="fa fa-facebook-f" />&nbsp;&nbsp;</a> : null}
+                {this.state.github ? <a href={this.state.github} target='_blank'><i className="fa fa-github" />&nbsp;&nbsp;</a> : null}
               </span>
           </div>
 

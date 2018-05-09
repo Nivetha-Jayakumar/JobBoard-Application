@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 // import axios from 'axios';
 // import SearchBox from './components/SearchBox';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
@@ -173,7 +173,7 @@ class App extends Component {
     // console.log('URL outside if', url);
       return (
         <div id="home-page">
-          <Route exact path="/" render={(props) => (
+          {/* <Route exact path="/" render={(props) => (
             <div>
               <div>
                 <Navbar {...props} onSearch={this.handleSearch} type={this.state.isEmployer} status={this.state.isLoggedIn}/>
@@ -182,7 +182,8 @@ class App extends Component {
                 <HomePage />
               </div>
             </div>
-          )} />
+          )} /> */}
+          <Route exact path="/" component={HomePage} />
 
           {/* <Route path={profileurl} component={ProfilePage} /> */}
           {/* <Route exact path="/signup" render={(props) => <SignUp {...props} />} /> */}

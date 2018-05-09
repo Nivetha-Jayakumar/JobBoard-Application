@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import {} from 'react-router-dom';
+import {Redirect} from 'react-router';
 // import {findDOMNode} from 'react-dom';
 import Navbar from './Navbar';
 // import SearchBox from './SearchBox';
@@ -11,6 +11,7 @@ class People extends Component {
     this.state = this.props.location.state;
     this.state.query = '';
     this.state.people = [];
+    this.state.redirect = false;
 
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -27,13 +28,19 @@ class People extends Component {
     // console.log(user);
     let profile = user.firstname.toLowerCase() + user.lastname.toLowerCase();
     // console.log(profile);
-    this.props.history.push({
-      pathname: `/in/${profile}`,
-      state: {
-        data: this.state,
-        profile: user
+    API.updateViews(user).then((response) => {
+      if (response === 200) {
+        this.props.history.push({
+          pathname: `/in/${profile}`,
+          state: {
+            data: this.state,
+            profile: user
+          }
+        })
       }
-    })
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   handleTabPage(tab) {
@@ -43,6 +50,7 @@ class People extends Component {
     // console.log(tab);
     if (tab === 'logout') {
       API.logout(this.state.tokens[0]).then((response) => {
+        console.log(response);
         if (response === 200) {
           this.setState({redirect: true});
         }
@@ -109,39 +117,43 @@ class People extends Component {
   }
 
   render() {
-    return (
-      <div className="container">
-        <div className="navbar">
-          <Navbar
-            onSearch={this.handleIt}
-            status={this.state.isLoggedIn}
-            data={this.props.location.state}
-            type={this.props.location.state.isEmployer}
-            chooseTab={this.handleTabPage} />
-        </div>
-
-        <div className="text-center">
-          <h3>Over 50+ members are using JobSeek to get hired</h3>
-        </div>
-
-        <div className="people-search">
-          <div className="col-xs-12 input-group add-on">
-              <input
-                id="peoplesearch"
-                type="search"
-                className="form-control input-lg"
-                placeholder="Search"
-                autoFocus
-                onChange={this.handleSearch}
-              />
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    } else {
+      return (
+        <div className="container">
+          <div className="navbar">
+            <Navbar
+              onSearch={this.handleIt}
+              status={this.state.isLoggedIn}
+              data={this.props.location.state}
+              type={this.props.location.state.isEmployer}
+              chooseTab={this.handleTabPage} />
           </div>
 
-          <div className="col-xs-12 peoplelist-content">
-            {this.state.people.length ? this.renderPeople() : null}
+          <div className="text-center">
+            <h3>Over 50+ members are using JobSeek to get hired</h3>
+          </div>
+
+          <div className="people-search">
+            <div className="col-xs-12 input-group add-on">
+                <input
+                  id="peoplesearch"
+                  type="search"
+                  className="form-control input-lg"
+                  placeholder="Search"
+                  autoFocus
+                  onChange={this.handleSearch}
+                />
+            </div>
+
+            <div className="col-xs-12 peoplelist-content">
+              {this.state.people.length ? this.renderPeople() : null}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 

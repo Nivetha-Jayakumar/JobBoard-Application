@@ -294,8 +294,33 @@ export const getUser = (user) => {
     }
 
   }).catch((err) => {
-    return err;
+    return 400;
   });
+}
+
+export const updateViews = (user) => {
+  // console.log(user._id);
+  const id = user._id;
+  return fetch(`${url}/updateviews/${id}`)
+  .then((res) => {
+    return res.status;
+  }).catch((err) => console.log(err));
+}
+
+export const sendMessage = (data, id) => {
+  // console.log(data, id);
+
+  return fetch(`${url}/sendmessage/${id}`, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data)
+  }).then((res) => {
+    return res.status
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 
 export const uploadImage = (image, id) => {

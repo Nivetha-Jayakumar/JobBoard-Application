@@ -21,8 +21,9 @@ const userSchema = new mongoose.Schema({
     trim: true
   },
   views: {
-    type: String,
-    trim: true
+    type: Number,
+    trim: true,
+    default: 0
   },
   joined: {
     type: String
@@ -166,7 +167,6 @@ const userSchema = new mongoose.Schema({
   messages: [{
     from: String,
     to: String,
-    subject: String,
     message: String,
     isRead: {
       type: Boolean,

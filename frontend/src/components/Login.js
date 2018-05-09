@@ -13,11 +13,21 @@ class Login extends Component {
         }
 
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleTabPage = this.handleTabPage.bind(this);
     }
 
     componentWillMount() {
         // console.log('Login page');
         // console.log(this.props);
+    }
+
+    handleTabPage(tab) {
+      // console.log(tab);
+      if (tab === 'join') {
+        this.props.history.push('signup');
+      } else if (tab === 'login') {
+        this.props.history.push('login');
+      }
     }
 
     handleLogin(event) {
@@ -28,7 +38,7 @@ class Login extends Component {
             // API.getUser({email, password});
             API.getUser({email, password}).then((data) => {
                 // console.log(data);
-                if (!data) {
+                if (data === 400) {
                     this.setState({error: 'Please check your credentials'});
                     // this.props.history.push({
                     //   pathname: '/',
@@ -51,53 +61,63 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="image">
+            <div className="" id="main">
                 <Navbar
                     onSearch={this.handleIt}
                     status={this.state.isLoggedIn}
                     type={this.state.isEmployer}
                     data={this.props.location.state}
                     chooseTab={this.handleTabPage}/>
-                <div>
-                    <div className="container1 signup1 bg">
-                        {this.state.error}
-                        <h1 className="company">WELCOME TO JOB BOARD</h1>
-                        <form onSubmit={this.handleLogin}>
-                            {/*<Panel bsStyle="primary"></Panel>*/}
-                            {/* <label>
-                 <input
 
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={(event) => this.setState({email: event.target.value})}
+                <div id="login-container" className="col-xs-12" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525871899/login-bg.jpg)`}}>
+                  <br />
+                  <div className="text-center col-md-4 col-md-offset-4">
+                    {this.state.error ?
+                      <span className="alert alert-danger">
+                        <i className="fa fa-close" /> {this.state.error}
+                      </span> : null}
+                      <div>&nbsp;</div>
+                    <form className="form-horizontal login-form panel panel-body" onSubmit={this.handleLogin}>
+                      <div className="col-xs-12 text-center login-image">
+                        <h2>Log In</h2>
+                        <hr />
+                        <br />
+                        <img
+                          src="https://res.cloudinary.com/jobboard/image/upload/v1525871624/login.gif"
+                          alt="login"
+                          style={{width: 150}}
+                         />
+                      </div>
+                      <div>&nbsp;</div>
+                      <div>&nbsp;</div>
+                      <div>&nbsp;</div>
+                      <div className="input-group col-xs-12 login-input">
+                        <input
+                          type="email"
+                          className="form-control input-lg"
+                          placeholder="Email"
+                          autoFocus
+                          onChange={(event) => this.setState({email: event.target.value})}
+                        />
+                        <span className="input-group-addon"><i className="fa fa-user-o" /></span>
+                      </div>
+                      <br/>
+                      <div className="input-group login-input">
+                        <input
+                          type="password"
+                          className="form-control input-lg"
+                          placeholder="Password"
+                          onChange={(event) => this.setState({password: event.target.value})}
+                        />
+                        <span className="input-group-addon"><i className="fa fa-low-vision" /></span>
+                      </div>
 
-              />
-            </label>*/}
-                            <div className="form-group">
-                                <input type="email" name="email" className="form-control input-lg" placeholder="Email"
-                                       onChange={(event) => this.setState({email: event.target.value})}/>
-                            </div>
-                            <br/>
-                            {/*<label>
-              <input
-                type="password"
-                name="pwd"
-                placeholder="Password"
-                onChange={(event) => this.setState({password: event.target.value})}
-              />
-            </label>*/}
-                            <div className="form-group">
-                                <input type="password" name="password" className="form-control input-lg"
-                                       placeholder="Password"
-                                       onChange={(event) => this.setState({password: event.target.value})}/>
-                            </div>
-                            <br/><br/>
-                            <button className="btn btn-primary" type="submit">Login</button>
-                        </form>
-                        <br/>
-                        <span>Don't have an account?</span>&nbsp;<Link to="/signup">SignUp</Link>
-                        {/* Don't have an account?<a onClick={() => this.setState({redirect: true})}>SignUp</a> */}
+                      <br/><br/>
+                      <button className="col-xs-12 btn btn-lg login-btn" type="submit">Login</button>
+                      <div>&nbsp;</div>
+                      <span>Don't have an account?</span>&nbsp;<Link id="signup-link" to="/signup">SignUp</Link>
+                    </form>
+                    <br/>
                     </div>
                 </div>
             </div>
