@@ -126,21 +126,6 @@ class CompaniesList extends Component{
 
   renderCompanies() {
     return (
-      // <div className="col-xs-12">
-      //   {this.state.companies.map((value, index) => (
-      //     <div key={index} className="row each-company">
-      //       <div className="col-xs-12 header">
-      //         <div className="col-xs-4 col-md-1 img">Image</div>
-      //         <div className="col-xs-8 col-md-11 post"><p>{value.name} <Link to={{pathname: `/companies/${value.name}`, state: {company: value, data: this.props.location.state}}} target="" className="view-job" >View company <i className="fa fa fa-share-square-o" /></Link></p></div>
-      //         <div className="col-xs-4 col-xs-offset-4 col-md-3 col-md-offset-1 small-desc"><i className="fa fa-map-marker" /> {value.location}</div>
-      //         <div className="col-xs-4 col-md-4 pull-left small-desc"><i className="fa fa-users" /> {value.size} <span className="hidden-xs">employees</span></div>
-      //       </div>
-      //       <div className="col-xs-12 description">
-      //         <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">{value.short_description}</div>
-      //       </div>
-      //     </div>
-      //   ))}
-      // </div>
       <div className="">
         <h3 className="text-center">Most followed companies</h3>
         <h4 className="col-xs-12">{this.state.companies.length} companies</h4>

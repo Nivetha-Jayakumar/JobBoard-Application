@@ -21,7 +21,7 @@ module.exports = (app) => {
   /*********GET company_details*********/
   app.get('/companies/:name', (req, res) => {
     const {name} = req.params;
-    Company.find({name}).then((doc) => {
+    Company.find({name: new RegExp(name, 'i')}).then((doc) => {
       if (!doc.length) {
         return res.status(400).send('No such company');
       }

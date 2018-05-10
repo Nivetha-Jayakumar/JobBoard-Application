@@ -74,7 +74,7 @@ module.exports = (app, upload) => {
     })
   })
 
-  /********Get all_users_matchin_params_name**********/
+  /********Get all_users_matching_params_name**********/
   app.get('/users/:name/:id', (req, res) => {
     let {name, id} = req.params;
     // console.log(name);

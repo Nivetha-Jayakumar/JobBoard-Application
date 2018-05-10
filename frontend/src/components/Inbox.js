@@ -7,8 +7,14 @@ class Inbox extends Component {
   constructor(props){
     super(props);
     this.state = this.props.location.state;
+    this.state.showMessage = '';
 
     this.handleTabPage = this.handleTabPage.bind(this);
+  }
+
+  componentWillMount() {
+    // console.log(this.state.messages);
+    console.log(this.state.showMessage);
   }
 
   handleTabPage(tab) {
@@ -58,9 +64,28 @@ class Inbox extends Component {
               chooseTab={this.handleTabPage} />
           </div>
 
-          <div className="col-xs-12 panel panel-body inbox-view">
-            <h1>Messages</h1>
+          <div className="col-xs-12 panel panel-default inbox-view">
+            <h1 className="text-center">Messages</h1>
             <hr />
+            <div className="col-xs-6">
+              {this.state.messages.length ?
+                <span>
+                  {this.state.messages.map((value, index) => (
+                    <div key={index} className="panel panel-body view-message" onClick={() => this.setState({showMessage: value})}>
+                      <h4>{value.from}</h4>
+                      <h6>{value.message}</h6>
+                      {value.isRead ? null : <p className="pull-right">Unread</p>}
+                    </div>
+                  ))}
+                </span> : null
+              }
+            </div>
+            {this.state.showMessage ?
+              <div className="col-xs-6 panel panel-body">
+                <h2>Message from {this.state.showMessage.from}</h2>
+                <hr />
+                <h4>{this.state.showMessage.message}</h4>
+              </div> : null}
           </div>
         </div>
       )

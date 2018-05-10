@@ -247,27 +247,27 @@ class CompanyPage extends Component {
               <p className="text-center">Ratings: {average}</p>
             </div>
             <hr />
-            <div className="reviews">
+            <div className="row reviews">
               {this.state.company.reviews.map((value, index) => (
-                <div key={index} className="row each-review">
-                  <div className="col-xs-12 review-header">
-                    <div className="col-xs-4 col-md-1 img">Image</div>
-                    <div className="col-xs-8 col-md-10 post"><p>"{value.title}"</p></div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 small-desc review-status">- {value.status} {value.job} | {value.postedOn}</div>
+                <div key={index} className="col-xs-12 panel panel-body each-review">
+                  <div className=" review-header">
+                    <div className=" post"><h3>"{value.title}"</h3></div>
+                    <hr />
+                    <div className="small-desc review-status">{value.status} {value.job} | {value.postedOn}</div>
                   </div>
-                  <div className="col-xs-12 review-description">
+                  <div className="review-description">
                     <br />
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros"><b>Pros</b></div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros">{value.pros}</div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">&nbsp;</div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros"><b>Cons</b></div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros">{value.cons}</div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1">&nbsp;</div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros"><b>Benefits</b></div>
-                    <div className="col-xs-8 col-xs-offset-4 col-md-10 col-md-offset-1 pros">{value.benefits}</div>
+                    <div className=" pros"><b>Pros</b></div>
+                    <div className=" pros">{value.pros}</div>
+                    <div className="">&nbsp;</div>
+                    <div className="pros"><b>Cons</b></div>
+                    <div className=" pros">{value.cons}</div>
+                    <div className="">&nbsp;</div>
+                    <div className="pros"><b>Benefits</b></div>
+                    <div className="pros">{value.benefits}</div>
                   </div>
                   <div>&nbsp;</div>
-                  <hr />
+
                 </div>
               ))}
             </div>

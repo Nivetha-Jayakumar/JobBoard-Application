@@ -227,7 +227,7 @@ hr {
 }
 
 .img, .post, .comp, .small-desc {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
 }
 
@@ -238,6 +238,10 @@ hr {
 .each-job, .each-company {
   /* border: 1px solid black; */
   /* padding: 15px; */
+}
+
+.each-review {
+  border-color: #ddd;
 }
 
 .each-job:hover {
@@ -295,6 +299,7 @@ hr {
 
 .company {
   /* border: 1px solid black; */
+  border-color: #ddd;
 }
 
 /* .header, .tabs, .tab {
@@ -788,6 +793,18 @@ th {
   transition: 0.6s all;
 }
 
+.view-message{
+  border-color: #eee;
+  transition: 0.6s all;
+}
+
+.view-message:hover {
+  color: #fff;
+  background-color: #d42525;
+  transition: 0.6s all;
+  cursor: pointer;
+}
+
 .job-panel:hover, .people-panel:hover {
   -webkit-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
   -moz-box-shadow: -1px 11px 71px -17px rgba(0,0,0,0.67);
@@ -899,7 +916,7 @@ td > a {
 }
 
 .reviews {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .review-description {
