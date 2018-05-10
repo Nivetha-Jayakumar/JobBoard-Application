@@ -36,6 +36,7 @@ class Login extends Component {
         if (this.state.email && this.state.password) {
             let {email, password} = this.state;
             // API.getUser({email, password});
+            // console.log(email, password);
             API.getUser({email, password}).then((data) => {
                 // console.log(data);
                 if (data === 400) {
@@ -44,7 +45,7 @@ class Login extends Component {
                     //   pathname: '/',
                     //   state: ''
                     // });
-                } else {
+                } else if(data !== undefined) {
                     // this.setState({isLoggedIn: true, isEmployer: true});
                     data.isLoggedIn = true;
                     // console.log(data.isLoggedIn);
@@ -54,6 +55,8 @@ class Login extends Component {
                         pathname: `/in/${profile}`,
                         state: data
                     })
+                } else {
+                  this.setState({error: 'User not found'});
                 }
             })
         }

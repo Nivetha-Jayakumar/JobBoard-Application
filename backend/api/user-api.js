@@ -89,7 +89,7 @@ module.exports = (app, upload) => {
       // console.log(docs);
       res.send(docs);
     }).catch((err) => {
-      res.send(400).status(err);
+      res.status(400).send(err);
     })
   })
 

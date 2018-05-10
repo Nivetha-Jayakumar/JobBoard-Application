@@ -131,6 +131,7 @@ class SignUp extends Component {
                        </div>
 
                        {this.state.check === 'Recruiter' ?
+                       <div className="slide-form">
                        <form className="form-horizontal login-form panel panel-body" onSubmit={this.handleEmployerSignUp}>
                          <div className="col-xs-12 text-center signup-image">
                            <img
@@ -211,7 +212,8 @@ class SignUp extends Component {
                          <button className="col-xs-12 btn btn-lg login-btn" type="submit">Sign Up</button>
                          <div>&nbsp;</div>
                          <span>Already have an account?</span>&nbsp;<Link id="signup-link" to="/login">Log In</Link>
-                       </form> :
+                       </form></div> :
+                       <div className="slide-form">
                        <form className="form-horizontal login-form panel panel-body" onSubmit={this.handleJobSeekerSignUp}>
                          <div className="col-xs-12 text-center signup-image">
                            <img
@@ -272,6 +274,7 @@ class SignUp extends Component {
                          <div>&nbsp;</div>
                          <span>Already have an account?</span>&nbsp;<Link id="signup-link" to="/login">Log In</Link>
                        </form>
+                     </div>
                      }
 
                   </div>

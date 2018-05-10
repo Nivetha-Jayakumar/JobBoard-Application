@@ -178,9 +178,9 @@ module.exports = (app, upload) => {
 
     /*************Update hiring_status**************/
     app.patch('/jobs/updatehiring/:id', (req, res) => {
-      console.log(req.body, req.params);
+      // console.log(req.body, req.params);
       let isHired = req.body.status === 'yes' ? true : false;
-      console.log(isHired);
+      // console.log(isHired);
       Job.update(
         {'applied._id': req.params.id},
         {$set: {

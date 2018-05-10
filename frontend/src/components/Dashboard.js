@@ -12,13 +12,15 @@ class Dashboard extends Component {
       views: this.props.location.state.views,
       jobs: [],
       error: '',
+      messages: this.props.location.state.messages,
       isHidden: true,
       isEmployer: this.props.location.state.isEmployer,
       isLoggedIn: this.props.location.state.isLoggedIn,
       redirect: false
     }
-    this.toggleView = this.toggleView.bind(this);
+    // this.toggleView = this.toggleView.bind(this);
     this.handleTabPage = this.handleTabPage.bind(this);
+    this.handleInbox = this.handleInbox.bind(this);
   }
 
   componentWillMount(){
@@ -46,11 +48,20 @@ class Dashboard extends Component {
 
   }
 
-  toggleView() {
-    this.setState(prevState => ({
-      isHidden: !prevState.isHidden
-    }));
+  handleInbox(event) {
+    event.preventDefault();
+    // console.log(this.props.location.state);
+    this.props.history.push({
+      pathname: `/inbox`,
+      state: this.props.location.state
+    })
   }
+
+  // toggleView() {
+  //   this.setState(prevState => ({
+  //     isHidden: !prevState.isHidden
+  //   }));
+  // }
 
   handleTabPage(tab) {
     // console.log(this.state);
@@ -183,6 +194,13 @@ class Dashboard extends Component {
       if (isNaN(success_rate)) {
         success_rate = 0;
       }
+
+      let inbox = 0;
+      this.state.messages.map((value, index) => {
+        if (!value.isRead) {
+          inbox += 1
+        }
+      })
       // document.getElementById("data").innerHTML = success_rate;
 
       return (
@@ -228,11 +246,14 @@ class Dashboard extends Component {
               <div className="panel-body text-center views"><p>{this.state.views}</p></div>
             </div>
 
-            {/* <div id="rejects">
-
+            <div className="col-xs-12 col-md-6 text-center panel panel-body inbox-panel" onClick={this.handleInbox}>
+              <h4>Inbox</h4>
+              <hr />
+              <h4>{this.props.location.state.messages.length} total messages</h4>
+              {inbox === 0 ? null : <h4>{inbox} unread message(s)</h4>}
             </div>
 
-            <div id="success-rate">
+            {/* <div id="success-rate">
 
             </div> */}
           </div>

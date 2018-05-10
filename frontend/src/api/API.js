@@ -182,6 +182,8 @@ export const updateAppliedJobStatus = (email, jobID, status) => {
     jobID
   }
 
+  // console.log(data);
+
   fetch(`${url}/users/updateappliedjobstatus/${email}`, {
     method: 'PATCH',
     headers: new Headers({
@@ -208,7 +210,8 @@ export const getMyAppliedJobs = (email) => {
 
 export const updateHiring = (id, name, applicantEmail, jobID, jobCompany, jobPost, status) => {
   // console.log({status, applicantEmail});
-  // updateAppliedJobStatus(applicantEmail, jobID, status);
+  updateAppliedJobStatus(applicantEmail, jobID, status);
+  // console.log(id, name, status, jobPost);
 
   return fetch(`${url}/jobs/updatehiring/${id}`, {
     method: 'PATCH',
@@ -217,7 +220,7 @@ export const updateHiring = (id, name, applicantEmail, jobID, jobCompany, jobPos
     }),
     body: JSON.stringify({status, name, email: applicantEmail, company: jobCompany, designation: jobPost})
   }).then((res) => {
-      return res.status
+      return res.status;
   }).catch((err) => {
     console.log(err);
   })
@@ -290,9 +293,10 @@ export const getUser = (user) => {
       return res.json();
     } else {
       // console.log('In failure');
-      return;
+      return 400;
     }
-
+  }).then((resJSON) => {
+    return resJSON;
   }).catch((err) => {
     return 400;
   });
