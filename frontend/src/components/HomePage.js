@@ -98,14 +98,16 @@ class HomePage extends Component {
                     <h5>Let us know about your issue and a Professional will reach you out.</h5>
                   </div>
                   <div className="col-md-6" id="need-help-box">
-                    <input
-                      type="email"
-                      className="form-control input-lg"
-                      placeholer="Enter a valid email address"
-                    />
-                    {/* <span className="col-md-2"> */}
-                      <button className="btn btn-lg search-btn"><i className="fa fa-search fa-lg" /></button>
-                    {/* </span> */}
+                    <div className="input-group">
+                      <input
+                        type="email"
+                        className="form-control input-lg need-help"
+                        placeholder="Enter a valid email address"
+                      />
+                      <span className="input-group-btn">
+                        <button className="btn btn-lg search-btn"><i className="fa fa-search fa-lg" /></button>
+                      </span>
+                    </div>
                   </div>
               </div>
 

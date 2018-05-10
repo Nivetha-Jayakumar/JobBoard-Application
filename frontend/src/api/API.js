@@ -382,7 +382,7 @@ export const updateSkills = (skills, id) => {
     body: JSON.stringify(data)
   }).then((res) => {
     // console.log(res);
-    res.json()
+    return res.json()
   }).then((resJSON) => {
     return resJSON;
   }).catch((err) => {

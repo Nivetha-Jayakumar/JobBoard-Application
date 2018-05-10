@@ -159,6 +159,7 @@ class ProfilePage extends Component {
     let skills = this.state.skillset;
 
     API.updateSkills(skills, this.state._id).then((response) => {
+      // console.log(response);
       this.setState({skills: response.skills, addSkill: false})
     }).catch((err) => {
       console.log(err);

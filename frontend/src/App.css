@@ -360,6 +360,29 @@ input[name='cover-photo'] {
   display: none;
 }
 
+.disabled {
+  color: #d42525;
+  border: #d42525;
+}
+
+.active > a {
+  color: #fff;
+  background-color: #d42525;
+  border: none;
+}
+
+.post-btn {
+  color: #d42525;
+  transition: 0.6s all;
+  border-color: #d42525;
+}
+
+.post-btn:hover {
+  color: #fff;
+  transition: 0.6s all;
+  background-color: #d42525;
+}
+
 
 .select-btn:hover {
   border: 1px solid;
@@ -629,8 +652,15 @@ th {
 }
 
 #need-help-box > input {
-  width: 80%;
+  /* width: 80%; */
+  border-radius: 30px;
 }
+
+.need-help {
+  border-radius: 30px;
+}
+
+
 
 
 

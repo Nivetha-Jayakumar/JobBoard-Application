@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 // import { Route } from 'react-router-dom';
 // import Overview from './Overview';
 // import axios from 'axios';
@@ -27,13 +28,14 @@ class CompanyPage extends Component {
     this.state.pros = '';
     this.state.cons = '';
     this.state.benefits = '';
-    this.state.rating = '';
+    this.state.setRating = 0;
 
     this.state.jobs = [];
 
     this.handleSections = this.handleSections.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTabPage = this.handleTabPage.bind(this);
+    this.changeRating = this.changeRating.bind(this);
   }
 
   componentWillMount() {
@@ -83,32 +85,9 @@ class CompanyPage extends Component {
 
   }
 
-  // handleTabPage(tab) {
-  //   // console.log('In profile', tab);
-  //   let profile = this.props.location.state.data.firstname;
-  //   // console.log(profile,tab);
-  //   // tab = tab.toLowerCase();
-  //   // // console.log(tab);
-  //   if (tab === 'logout') {
-  //     API.logout(this.props.location.state.tokens[0]).then((response) => {
-  //       if (response === 200) {
-  //         this.setState({redirect: true});
-  //       }
-  //     }).catch((err) => {
-  //       console.log(err);
-  //     })
-  //   } else if (tab === 'profile') {
-  //     this.props.history.push({
-  //       pathname: `/in/${profile}`,
-  //       state: this.props.location.state
-  //     })
-  //   } else {
-  //     this.props.history.push({
-  //       pathname: `/${tab}`,
-  //       state: this.props.location.state
-  //     })
-  //   }
-  // }
+  changeRating(newRating) {
+    this.setState({rating: newRating});
+  }
 
   handleTabPage(tab) {
     // console.log(tab);
@@ -117,7 +96,7 @@ class CompanyPage extends Component {
     // tab = tab.toLowerCase();
     // console.log(tab);
     if (tab === 'logout') {
-      API.logout(this.props.location.state.tokens[0]).then((response) => {
+      API.logout(this.state.data.tokens[0]).then((response) => {
         if (response === 200) {
           this.setState({redirect: true});
         }
@@ -154,6 +133,7 @@ class CompanyPage extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // console.log(this.state);
+    // console.log(this.state);
     let data = {
       job: this.state.job,
       status: this.state.status,
@@ -161,7 +141,7 @@ class CompanyPage extends Component {
       pros: this.state.pros,
       cons: this.state.cons,
       benefits: this.state.benefits,
-      rating: this.state.rating
+      rating: this.state.setRating
     }
 
     // console.log(data);
@@ -236,22 +216,39 @@ class CompanyPage extends Component {
     });
 
     average = sum/count;
-    console.log(this.state.comapany);
+    // console.log(this.state.comapany);
     // console.log(average);
     if (this.state.company.reviews.length) {
+      // let rating = parseInt(this.state.rating);
+      // console.log(this.state.rating);
       return (
         <div>
           <div className="col-md-8 col-md-offset-2 review-company-content">
             <div>
-              <h4 className="text-center">{this.state.company.reviews.length} Reviews</h4>
-              <p className="text-center">Ratings: {average}</p>
+              <div className="text-center">
+                <StarRatings
+                  rating={average}
+                  starRatedColor="gold"
+                  starDimension="30px"
+                  numberOfStars={5}
+                  className="text-center"
+                />
+              </div>
             </div>
             <hr />
+            <h4 className="text-justify">{this.state.company.reviews.length} Reviews</h4>
             <div className="row reviews">
               {this.state.company.reviews.map((value, index) => (
                 <div key={index} className="col-xs-12 panel panel-body each-review">
                   <div className=" review-header">
-                    <div className=" post"><h3>"{value.title}"</h3></div>
+                    <div className=" post"><h3>"{value.title}" <StarRatings
+                      rating={parseInt(value.rating)}
+                      starRatedColor="gold"
+                      starDimension="20px"
+                      numberOfStars={5}
+                      starSpacing="2px"
+                      className="text-center"
+                    /></h3></div>
                     <hr />
                     <div className="small-desc review-status">{value.status} {value.job} | {value.postedOn}</div>
                   </div>
@@ -386,7 +383,7 @@ class CompanyPage extends Component {
             <div className="form-group">
               <label className="col-sm-4 control-label">How would you rate this company?: </label>
               <div className="col-sm-7">
-                <input
+                {/* <input
                   type="number"
                   className="form-control input-sm"
                   required
@@ -394,12 +391,20 @@ class CompanyPage extends Component {
                   max="5"
                   maxLength="1"
                   onChange={(event) => this.setState({rating: event.target.value})}
+                /> */}
+                <StarRatings
+                  rating={this.state.setRating}
+                  starRatedColor="gold"
+                  starDimension="30px"
+                  starHoverColor="gold"
+                  changeRating={this.changeRating}
+                  numberOfStars={5}
                 />
               </div>
             </div>
             <div className="form-group">
               <div className="col-sm-offset-4 col-sm-5">
-                <button type="submit" className="btn btn-md btn-primary">Post</button>
+                <button type="submit" className="btn btn-md post-btn">Post</button>
               </div>
             </div>
           </form>

@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
 import SearchBox from './SearchBox';
 import * as API from '../api/API';
+import {Link} from 'react-router-dom';
 
 class CompaniesList extends Component{
   constructor(props){
@@ -14,7 +15,9 @@ class CompaniesList extends Component{
       error: '',
       search: '',
       searchCompany: {},
-      isHidden: true
+      isHidden: true,
+      pages : 0,
+      currentPage : 1
     }
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -27,7 +30,10 @@ class CompaniesList extends Component{
     // console.log(this.props.location.state);
     API.getAllCompanies().then((data) => {
       // console.log(data);
-      this.setState({companies: data});
+      this.setState({
+        companies: data,
+        pages : Math.ceil(data.length / 6)
+      });
     });
   }
 
@@ -78,6 +84,21 @@ class CompaniesList extends Component{
     }
   }
 
+  handlePage = (events) => {
+    events.preventDefault();
+    let pg = Number(events.target.innerHTML)
+    console.log("Inside handle page : ",events.target.innerHTML);
+    if(events.target.innerHTML == 'Last'){
+      pg = this.state.pages
+    }else if(events.target.innerHTML == 'First'){
+      pg = 1;
+    }
+    console.log("Page Value : ",pg);
+    this.setState({
+        currentPage : pg
+    });
+    //this.forceUpdate();
+  }
   gotoCompany(company) {
     // console.log(company);
     this.props.location.state.search = company;
@@ -124,13 +145,89 @@ class CompaniesList extends Component{
     )
   }
 
+
   renderCompanies() {
+
+    let userMessage;
+        let i;
+        var one = null,two = null,three = [],four = null,five = null;
+
+        if(this.state.pages > 0){
+            if(this.state.currentPage === 1){
+                one = (
+                    <li className="disabled" value = {1} ><a onClick = {this.handlePage}>First</a></li>
+                );
+            }else{
+                one = (
+                    <li value = {1} ><a onClick = {this.handlePage}>First</a></li>
+                )
+            }
+            if(this.state.current > 5){
+                i = this.state.current - 4;
+            }else{
+                i = 1;
+            }
+            if(i !== 1){
+                two = (
+                    <li className="disabled"><a>...</a></li>
+                )
+            }
+            for(;i <= (Number(this.state.currentPage) + 4) && i <= this.state.pages; i++){
+                if(i === Number(this.state.currentPage)){
+                    // console.log("Inside Active loop : " + i);
+                    three[three.length] = (
+                        <li className="active">
+                            <a value = {i}>{i}</a>
+                        </li>
+                    )
+                }else{
+                    console.log("In else part : " + this.state.currentPage + " i value : " + i);
+                    three[three.length] = (
+                        <li onClick = {this.handlePage}>
+                            {/*<a href={"/user/" + i}>{i}</a>*/}
+                            <a>{i}</a>
+                        </li>
+                    )
+                }
+                if(i === Number(this.state.current) + 4 && i < this.state.pages){
+                    four = (
+                        <li className="disabled"><a>...</a></li>
+                    );
+                }
+            }
+            if(this.state.current === this.state.pages){
+                five = (
+                    <li className="disabled"><a>Last</a></li>
+                )
+            }else{
+                five = (
+                    <li><a onClick = {this.handlePage}>Last</a></li>
+                )
+            }
+            userMessage = (
+              <div className="col-xs-12 text-center">
+                <ul className="pagination text-center">
+                    {one}
+                    {two}
+                    {three}
+                    {four}
+                    {five}
+                </ul>
+              </div>
+
+            )
+        }
+
+        var count = this.state.companies.length;
+
+        let result = this.state.companies.slice((6 * this.state.currentPage) - 6,this.state.currentPage*6);
+        //console.log("Answer : ",JSON.stringify(result));
     return (
       <div className="">
         <h3 className="text-center">Most followed companies</h3>
         <h4 className="col-xs-12">{this.state.companies.length} companies</h4>
         <div id="joblist-content">
-        {this.state.companies.map((value, index) => (
+        {result.map((value, index) => (
           <div key={index} className="col-sm-4 job-content item active">
             <div className="panel panel-body job-panel">
               <span className="col-xs-12 text-center company-logo"><img src={value.image} alt={value.name} /></span>
@@ -145,6 +242,7 @@ class CompaniesList extends Component{
           </div>
         ))}
       </div>
+      {userMessage}
       </div>
     )
   }
