@@ -17,6 +17,8 @@ const msgAPI = require('./api/message-api');
 var app = express();
 app.use(cors());
 
+const port = process.env.PORT || 4000;
+
 app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +42,6 @@ msgAPI(app);
 //   })
 // });
 
-app.listen(4000, () => {
-  console.log('Started at port 4000');
+app.listen(port, () => {
+  console.log(`Started at port ${port}`);
 })
