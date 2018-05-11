@@ -144,7 +144,7 @@ class HomePage extends Component {
               </div>
 
               <div id="about-page" className="col-xs-12 text-center">
-                <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt='jobseek-logo' style={{width:100}} />
+                <img src="https://res.cloudinary.com/jobboard/image/upload/v1526005697/logo-new.png" alt='jobseek-logo' style={{width:100}} />
                 <h5 >One Washington Square, San Jose 95192, California</h5>
                 <h5>+1 510 458 1477</h5>
                 <h5>info@jobseek.com</h5>

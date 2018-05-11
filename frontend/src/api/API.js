@@ -1,6 +1,7 @@
 // import axios from 'axios';
 
 const url = 'http://localhost:4000';
+// const url = 'https://jobboardbackend.herokuapp.com';
 
 export const getCompany = (company) => {
   // console.log(company);

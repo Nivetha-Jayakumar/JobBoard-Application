@@ -108,7 +108,7 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
             </button>
             <a className="navbar-brand" onClick={() => <Redirect to="/" />}>
-              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 70, height: 70}} />
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1526005869/logo-white.png" alt="JobSeek" style={{width: 90, height: 90}} />
             </a>
           </div>
 
@@ -146,7 +146,7 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
             </button>
             <a className=" navbar-brand" onClick={() => this.setState({redirect: true})}>
-              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 40, height: 40}} />
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1526005697/logo-new.png" alt="JobSeek" style={{width: 40, height: 40}} />
             </a>
           </div>
 
@@ -190,7 +190,7 @@ class Navbar extends Component {
               <span className="icon-bar"></span>
             </button>
             <a className=" navbar-brand" onClick={() => this.setState({redirect: true})}>
-              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 40, height: 40}} />
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1526005697/logo-new.png" alt="JobSeek" style={{width: 40, height: 40}} />
             </a>
           </div>
 
