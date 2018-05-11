@@ -12,6 +12,7 @@ const {User} = require('./models/users');
 const companyAPI = require('./api/company-api');
 const userAPI = require('./api/user-api');
 const jobAPI = require('./api/job-api');
+const msgAPI = require('./api/message-api');
 
 var app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 companyAPI(app);
 userAPI(app, upload);
 jobAPI(app, upload);
+msgAPI(app);
 
 
 // app.get('/reviews/:name', (req, res) => {

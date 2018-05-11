@@ -281,29 +281,27 @@ class ApplyJob extends Component {
               chooseTab={this.handleTabPage} />
           </div>
 
-          <div className="cover text-center">
+          {/* <div className="cover text-center">
             <h1>{this.state.job.company}</h1>
-          </div>
+          </div> */}
 
-          <div className="container job">
+          <div className="container panel panel-body job">
             {/* <div className="col-xs-12 text-center company-logo">
               <img />
             </div> */}
 
-            <div className="col-xs-12 apply-job-header">
-              <span className="col-xs-12 col-sm-4 text-right apply-job-header-content">
-                Image
-              </span>
-              <span className="col-xs-12 col-sm-6 make-center apply-job-header-content">
+            <div className="col-xs-12 apply-job-header text-center">
+              <span className="make-center apply-job-header-content">
+                <h1>{this.state.job.company}</h1>
                 <h3>{this.state.job.designation}</h3>
               </span>
 
               <br />
-              <div className="col-xs-12 col-md-8 col-md-offset-2 apply-job-header-content job-tags">
+              <div className="col-xs-12 text-center apply-job-header-content job-tags">
                 {/* <p className="col-md-3 job-tags">Job ID: {this.state.job.jobID}</p> */}
-                <p className="col-md-3 col-md-offset-3 job-tags"><i className="fa fa-map-marker fa-lg" /> &nbsp; {this.state.job.location}</p>
-                <p className="col-md-3 job-tags"><i className="fa fa-user fa-lg" /> &nbsp; {this.state.job.postedBy[0].name}</p>
-                <p className="col-md-3 job-tags"><i className="fa fa-calendar fa-lg" /> &nbsp; {this.state.job.postedOn}</p>
+                <p className="col-md-4 job-tags"><i className="fa fa-map-marker fa-lg" /> &nbsp; {this.state.job.location}</p>
+                <p className="col-md-4 job-tags"><i className="fa fa-user fa-lg" /> &nbsp; {this.state.job.postedBy[0].name}</p>
+                <p className="col-md-4 job-tags"><i className="fa fa-calendar fa-lg" /> &nbsp; {this.state.job.postedOn}</p>
               </div>
             </div>
             &nbsp;

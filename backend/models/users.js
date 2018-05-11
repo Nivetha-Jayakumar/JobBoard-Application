@@ -164,15 +164,6 @@ const userSchema = new mongoose.Schema({
       trim: true
     }
   }],
-  messages: [{
-    from: String,
-    to: String,
-    message: String,
-    isRead: {
-      type: Boolean,
-      default: false
-    }
-  }],
   tokens: [{
     access: {
       type: String,

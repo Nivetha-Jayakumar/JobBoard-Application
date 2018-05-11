@@ -10,6 +10,7 @@ class ProfilePage extends Component {
   constructor(props){
     super(props);
     this.state = this.props.location.state;
+    this.state.viewuser = '';
     this.state.redirect = false;
     this.state.file = null;
     this.state.editable = false;
@@ -36,6 +37,7 @@ class ProfilePage extends Component {
     this.state.addToYear = 'Present';
     this.state.sendMessage = false;
     this.state.message = '';
+    this.state.alert ='';
 
 
     // this.login = this.login.bind(this);
@@ -52,6 +54,18 @@ class ProfilePage extends Component {
     this.gotToEdit = this.gotToEdit.bind(this);
     this.handleUploadCover = this.handleUploadCover.bind(this);
     this.handleSendMessage = this.handleSendMessage.bind(this);
+  }
+
+  componentWillMount() {
+    console.log(this.state.avatar);
+    if (this.props.location.state.profile) {
+      API.getOneUser(this.props.location.state.profile.email).then((response) => {
+        this.setState({viewuser: response}, () => console.log(this.state.viewuser));
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+
   }
 
   componentDidMount() {
@@ -93,12 +107,18 @@ class ProfilePage extends Component {
     // console.log(this.state.data.firstname);
     let data = {
       from: this.state.data.firstname + ' ' + this.state.data.lastname,
-      to: this.state.profile.firstname + ' ' + this.state.profile.lastname,
+      to: this.state.viewuser.firstname + ' ' + this.state.viewuser.lastname,
       message: this.state.message
     }
     // console.log(data);
 
-    API.sendMessage(data, this.state.profile._id);
+    API.sendMessage(data, this.state.profile._id).then((response) => {
+      if (response === 200) {
+        this.setState({alert: 'Success'});
+      }
+    }).catch((err) => {
+      this.setState({alert: 'Failure'});
+    })
   }
 
 
@@ -570,23 +590,23 @@ class ProfilePage extends Component {
             <div className="text-center avatar-image">
               <img
                 className="avatar"
-                src={this.state.profile.avatar}
-                alt={this.state.profile.firstname}
+                src={this.state.viewuser.avatar}
+                alt={this.state.viewuser.firstname}
                 style={{width: 260}}
               />
             </div>
             <div className="text-center profile-name">
-                  <h2 className="col-xs-12 name">{this.state.profile.firstname} {this.state.profile.lastname}</h2>
+                  <h2 className="col-xs-12 name">{this.state.viewuser.firstname} {this.state.viewuser.lastname}</h2>
                   <span className="lfg">
-                    {this.state.profile.linkedin ? <a href={this.state.profile.linkedin} target='_blank'><i className="fa fa-linkedin" />&nbsp;&nbsp;</a> : null}
-                    {this.state.profile.fb ? <a href={this.state.profile.fb} target='_blank'><i className="fa fa-facebook-f" />&nbsp;&nbsp;</a> : null}
-                    {this.state.profile.github ? <a href={this.state.profile.github} target="_blank"><i className="fa fa-github" />&nbsp;&nbsp;</a> : null}</span>
+                    {this.state.viewuser.linkedin ? <a href={this.state.viewuser.linkedin} target='_blank'><i className="fa fa-linkedin" />&nbsp;&nbsp;</a> : null}
+                    {this.state.viewuser.fb ? <a href={this.state.viewuser.fb} target='_blank'><i className="fa fa-facebook-f" />&nbsp;&nbsp;</a> : null}
+                    {this.state.viewuser.github ? <a href={this.state.viewuser.github} target="_blank"><i className="fa fa-github" />&nbsp;&nbsp;</a> : null}</span>
             </div>
 
             <br />
             <div className="text-center skills">
-                {this.state.profile.experience.length ? <p>Worked at {this.state.profile.experience[0].company}</p> : null}
-                {this.state.profile.skills ? <p>Experience working with {this.state.profile.skills}</p> : null}
+                {this.state.viewuser.experience.length ? <p>Worked at {this.state.viewuser.experience[0].company}</p> : null}
+                {this.state.viewuser.skills ? <p>Experience working with {this.state.viewuser.skills}</p> : null}
             </div>
             <br />
 
@@ -607,6 +627,10 @@ class ProfilePage extends Component {
                      <a onClick={() => this.setState({sendMessage: false})}>Cancel</a>&nbsp;&nbsp;
                      <button className="btn btn-md send" onClick={this.handleSendMessage}>Send</button>
                    </div>
+                   {this.state.alert ?
+                   <span>{this.state.alert === 'Success' ? <p className="alert alert-success"><i className="fa fa-check fa-2x" /> Message Sent</p> :
+                    <p className="alert alert-danger"><i className="fa fa-info fa-2x" /> Message not sent</p>}</span> :
+                  null}
               </div> :
               <div className="text-center send-message">
                 <button className="btn btn-lg" onClick={() => this.setState({sendMessage: true})}>
@@ -619,11 +643,11 @@ class ProfilePage extends Component {
           <hr />
           <div className="panel panel-body profile-body">
 
-          {this.state.profile.experience.length ?
+          {this.state.viewuser.experience.length ?
           <div id="experience">
             <h4 className="make-center profile-section-headers">EXPERIENCE</h4><br />
             <div className="">
-              <span>{this.state.profile.experience.map((value, index) => (
+              <span>{this.state.viewuser.experience.map((value, index) => (
                 <div key={index} className="col-xs-12 panel panel-body list">
                   <div className="col-md-2 text-center hidden-xs proj-img">
                     <i className="fa fa-graduation-cap fa-4x" />
@@ -639,11 +663,11 @@ class ProfilePage extends Component {
           </div> : null }
 
 
-            {this.state.profile.education.length ?
+            {this.state.viewuser.education.length ?
             <div id="education">
               <h4 className="make-center profile-section-headers">EDUCATION</h4><br />
               <div className="">
-                  <span>{this.state.profile.education.map((value, index) => (
+                  <span>{this.state.viewuser.education.map((value, index) => (
                     <div key={index} className="col-xs-12 panel panel-body list">
                       <div className="col-md-2 text-center hidden-xs grad-cap">
                         <i className="fa fa-graduation-cap fa-4x" />
@@ -658,11 +682,11 @@ class ProfilePage extends Component {
               </div>
             </div> : null }<br />
 
-            {this.state.profile.projects.length ?
+            {this.state.viewuser.projects.length ?
             <div id="projects">
               <h4 className="make-center profile-section-headers">PROJECTS</h4><br />
               <div className="">
-                <span>{this.state.profile.projects.map((value, index) => (
+                <span>{this.state.viewuser.projects.map((value, index) => (
                   <div key={index} className="col-xs-12 panel panel-body list">
                     <div className="col-md-2 text-center hidden-xs proj-img">
                       <i className="fa fa-graduation-cap fa-4x" />
@@ -839,9 +863,10 @@ class ProfilePage extends Component {
       return <Redirect to='/' />
     }
 
-    if (this.state.profile) {
+    if (this.props.location.state.profile) {
       return (
-        this.renderViewProfile()
+        // this.renderViewProfile()
+        null
       )
     }
 

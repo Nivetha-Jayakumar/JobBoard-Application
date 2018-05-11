@@ -12,12 +12,14 @@ class Dashboard extends Component {
       views: this.props.location.state.views,
       jobs: [],
       error: '',
-      messages: this.props.location.state.messages,
+      messages: '',
       isHidden: true,
       isEmployer: this.props.location.state.isEmployer,
       isLoggedIn: this.props.location.state.isLoggedIn,
-      redirect: false
+      redirect: false,
+      icon: false
     }
+
     // this.toggleView = this.toggleView.bind(this);
     this.handleTabPage = this.handleTabPage.bind(this);
     this.handleInbox = this.handleInbox.bind(this);
@@ -27,6 +29,12 @@ class Dashboard extends Component {
     // console.log(this.props.location.state);
     // this.setState({isHidden: false});
     // console.log(this.state);
+    API.getMessages(this.props.location.state._id).then((messages) => {
+      this.setState({messages});
+    }).catch((err) => {
+      console.log(err);
+    })
+
     if (this.state.isEmployer) {
       API.getMyPostedJobs(this.state.emailID).then((data) => {
         // console.log(data);
@@ -50,10 +58,13 @@ class Dashboard extends Component {
 
   handleInbox(event) {
     event.preventDefault();
-    // console.log(this.props.location.state);
+    console.log(this.props.location.state);
     this.props.history.push({
       pathname: `/inbox`,
-      state: this.props.location.state
+      state: {
+        data: this.props.location.state,
+        messages: this.state.messages
+      }
     })
   }
 
@@ -96,17 +107,29 @@ class Dashboard extends Component {
   }
 
   renderEmployerDashboard(){
+    let inbox = 0;
+    if (this.state.messages) {
+      this.state.messages.map((value, index) => {
+        if (!value.isRead) {
+          inbox += 1
+        }
+      })
+    }
+
     return (
-      <div className="container">
-        <div className="navbar">
+      <div>
+      <div className="container navbar">
           <Navbar
             onSearch={this.handleIt}
             status={this.state.isLoggedIn}
             data={this.props.location.state}
             type={this.props.location.state.isEmployer}
             chooseTab={this.handleTabPage} />
-        </div>
+      </div>
 
+      <div id="dash-main" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525997843/dash-back.jpg)`}}>
+        <h1 className="text-center"><span id="one">One</span> stop to view and manage your workflow</h1>
+      </div>
 
         <div className="container dashboard-content">
           {/* <div className="col-xs-12 panel panel-default text-center success-rate">
@@ -114,9 +137,19 @@ class Dashboard extends Component {
             <div className="panel-body" id="show-success-rate"> %</div>
           </div> */}
 
-          <div className="col-xs-12 panel panel-default col-md-6 gap">
-            <div className="panel-heading text-center" ><h4>Jobs posted</h4></div>
-            <div className="panel-body text-center col-xs-12" id="posted-jobs-list">
+          <div className="col-xs-12 text-center panel panel-body in-panel" onClick={this.handleInbox}>
+            <h3>Inbox</h3>
+            <hr />
+            <h1 className="enlarge"><i className="fa fa-envelope-o" /></h1>
+            <h4>{this.props.location.state.messages.length} total messages</h4>
+            {inbox === 0 ? null : <h4>{inbox} unread message(s)</h4>}
+          </div>
+
+          <div className="col-xs-12 panel panel-body col-md-6 in-panel" onClick={() => this.handleTabPage('recruit')}>
+            <h4 className="text-center">Jobs posted</h4>
+            <hr />
+            {this.state.jobs.length ? <span className="text-center"><h1 className="enlarge"><i className="fa fa-briefcase" /></h1><h1>{this.state.jobs.length}</h1></span> : <p className="alert alert-info"><i className="fa fa-info-circle fa-lg" /> You have not posted a job yet.</p>}
+            {/* <div className="panel-body text-center col-xs-12" id="posted-jobs-list">
               {this.state.jobs.length ?
                 // <div>
                 <table className="table table-bordered table-hover">
@@ -140,23 +173,20 @@ class Dashboard extends Component {
                 </table> : <p className="alert alert-info"><i className="fa fa-info-circle fa-lg" /> You have not posted a job yet.</p>
               }
 
-            </div>
+            </div> */}
           </div>
 
-          <div className="col-xs-12 panel panel-default col-md-6 profile-views gap">
-            <div className="panel-heading text-center"><h4>Profile views</h4></div>
-            <div className="panel-body text-center"><p>{this.state.views}</p></div>
+          <div className="col-xs-12 panel panel-body pull-right text-center col-md-6 profile-views in-panel">
+            <h4 className="text-center">Profile views</h4>
+            <hr />
+            <h1 className="enlarge"><i className="fa fa-eye" /></h1>
+            <h1>{this.state.views}</h1>
           </div>
 
-          <div id="rejects">
 
-          </div>
-
-          <div id="success-rate">
-
-          </div>
         </div>
       </div>
+    // </div>
     )
   }
 
@@ -196,44 +226,61 @@ class Dashboard extends Component {
       }
 
       let inbox = 0;
-      this.state.messages.map((value, index) => {
-        if (!value.isRead) {
-          inbox += 1
-        }
-      })
+      if (this.state.messages) {
+        this.state.messages.map((value, index) => {
+          if (!value.isRead) {
+            inbox += 1
+          }
+        })
+      }
+
       // document.getElementById("data").innerHTML = success_rate;
 
       return (
-        <div className="container">
-          <div className="navbar">
+        // <div id="dash-main">
+        <div>
+        <div className="container navbar">
+          {/* <div className="navbar"> */}
             <Navbar
               onSearch={this.handleIt}
               status={this.state.isLoggedIn}
               data={this.props.location.state}
               chooseTab={this.handleTabPage} />
+        </div>
+
+
+
+          <div id="dash-main" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525997843/dash-back.jpg)`}}>
+            <h1 className="text-center"><span id="one">One</span> stop to view and manage your workflow</h1>
           </div>
 
-          {/* <div className="cover">
-
-          </div> */}
-
+          <div id="dash">
           <div className="container dashboard-content">
-            <div className="col-xs-12 panel panel-default text-center success-rate">
-              <div className="panel-heading" id="success-rate-header"><h4>Your projected success rate</h4></div>
-              <div className="panel-body" id="show-success-rate">{success_rate} %</div>
+            {/* <div className="col-xs-12 col-md-6 panel panel-body text-center inbox-panel gap">
+              <h4>Your projected success rate</h4>
+              <hr />
+              <div id="show-success-rate">{success_rate} %</div>
+            </div> */}
+            <div className="col-xs-12 col-md-6 text-center panel panel-body success-panel" >
+              <h3>Projected success rate</h3>
+              <hr />
+              <h1 className="enlarge"><i className="fa fa-line-chart" /></h1>
+              <h1>{success_rate} %</h1>
             </div>
 
-            <div className="col-xs-12 panel panel-default col-md-6 applied-jobs gap">
-              <div className="panel-heading text-center" ><h4>Jobs applied</h4></div>
+            <div className="col-xs-12 col-md-6 panel panel-body pull-right text-center applied-jobs jobs-panel">
+              <h3>Jobs applied</h3>
+              <hr />
+              <h1><i className="fa fa-suitcase" /> &nbsp;&nbsp;&nbsp;{this.state.jobs.length}</h1>
               <div className="panel-body text-center" id="jobs-list">
                 {this.state.jobs.length ?
                   <span>
                   {this.state.jobs.map((value, index) => (
                     <div key={index} className="row">
-                      <p className="col-xs-8 col-md-8">{value.job} - {value.company}</p>
-                      {value.status === 'Pending' ? <p className="col-xs-3 badge badge-info">{value.status}</p> : null }
-                      {value.status === 'Accepted' ? <p className="col-xs-3 badge badge-success">{value.status}</p> : null }
-                      {value.status === 'Rejected' ? <p className="col-xs-3 badge badge-danger">{value.status}</p> : null }
+                      <h4 className="col-xs-8 col-md-8">{value.job} - {value.company}</h4>
+                      {value.status === 'Pending' ? <h4 className="col-xs-3 badge badge-info">{value.status}</h4> : null }
+                      {value.status === 'Accepted' ? <h4 className="col-xs-3 badge badge-success">{value.status}</h4> : null }
+                      {value.status === 'Rejected' ? <h4 className="col-xs-3 badge badge-danger">{value.status}</h4> : null }
                     </div>
                   ))}</span> : <p className="alert alert-info"><i className="fa fa-info-circle fa-lg" /> You have not applied to any jobs yet.</p>
                 }
@@ -241,15 +288,19 @@ class Dashboard extends Component {
               </div>
             </div>
 
-            <div className="col-xs-12 panel panel-default col-md-6 pull-right profile-views gap">
-              <div className="panel-heading text-center"><h4>Profile views</h4></div>
-              <div className="panel-body text-center views"><p>{this.state.views}</p></div>
+            <div className="col-xs-12 col-md-6 text-center panel panel-body pull-right profile-views view-panel gap">
+              <h3>Profile views</h3>
+              <hr />
+              <h1 className="enlarge"><i className="fa fa-eye" /></h1>
+              {/* <div className=""><p>{this.state.views}</p></div> */}
+              <h1>{this.state.views}</h1>
             </div>
 
             <div className="col-xs-12 col-md-6 text-center panel panel-body inbox-panel" onClick={this.handleInbox}>
-              <h4>Inbox</h4>
+              <h3>Inbox</h3>
               <hr />
-              <h4>{this.props.location.state.messages.length} total messages</h4>
+              <h1 className="enlarge"><i className="fa fa-envelope-o" /></h1>
+              <h4>{this.state.messages.length} total messages</h4>
               {inbox === 0 ? null : <h4>{inbox} unread message(s)</h4>}
             </div>
 
@@ -258,6 +309,9 @@ class Dashboard extends Component {
             </div> */}
           </div>
         </div>
+      </div>
+
+
       )
     }
   }

@@ -106,7 +106,6 @@ class JobsPage extends Component {
         {this.state.jobs.map((value, index) => (
           <div key={index} className="col-sm-4 job-content">
             <div className="panel panel-body job-panel">
-              <span className="col-xs-12 text-center">Image</span>
               <span className="col-xs-12 make-center job-post">{value.designation}</span>
               <span className="col-xs-12 make-center job-company">{value.company}</span>
               <hr className="job-separator" />
@@ -139,9 +138,9 @@ class JobsPage extends Component {
           </div>
         </div>
 
-        <div>&nbsp;</div>
-          <div className="text-center" id="job-search">
-            <h1>Over 1500+ jobs open. Apply now.</h1>
+
+          <div className="text-center" id="job-search" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1526001777/com.jpg)`}}>
+            <h1>Got a dream job in mind? Search for it. </h1>
             <br /><br />
             <div className="col-12 search">
                 <SearchBox onSearch={this.handleSearch} type='jobs'/>

@@ -29,6 +29,11 @@ class CompanyPage extends Component {
     this.state.cons = '';
     this.state.benefits = '';
     this.state.setRating = 0;
+    this.state.overview = true,
+    this.state.jobTab = false,
+    this.state.reviews = false,
+    this.state.writereview = false,
+    this.state.photo = false,
 
     this.state.jobs = [];
 
@@ -120,13 +125,40 @@ class CompanyPage extends Component {
     // console.log(section);
     // let company = this.state.company;
     if (section === 'overview') {
-      this.setState({section: 'overview'});
+      this.setState({
+        section: 'overview',
+        reviews : false,
+        writereview : false,
+        jobTab:false,
+        photo : false,
+        overview : true
+      });
+
     } else if (section === 'jobs') {
-      this.setState({section: 'jobs'});
+      this.setState({section: 'jobs',
+      reviews : false,
+        writereview : false,
+        jobTab:true,
+        photo : false,
+        overview : false
+    });
     } else if (section === 'reviews') {
-      this.setState({section: 'reviews'});
+      this.setState({section: 'reviews',
+      reviews : true,
+        writereview : false,
+        jobTab:false,
+        photo : false,
+        overview : false
+    });
     } else if (section === 'writereview') {
-      this.setState({section: 'writereview'});
+      this.setState({section: 'writereview',
+      reviews : false,
+        writereview : true,
+        jobTab:false,
+        photo : false,
+        overview : false
+
+    });
     }
   }
 
@@ -404,7 +436,7 @@ class CompanyPage extends Component {
             </div>
             <div className="form-group">
               <div className="col-sm-offset-4 col-sm-5">
-                <button type="submit" className="btn btn-md post-btn">Post</button>
+                <button type="submit" className="btn btn-lg post-btn">Post</button>
               </div>
             </div>
           </form>
@@ -453,15 +485,15 @@ class CompanyPage extends Component {
             <br />
             <div className="col-xs-10 col-xs-offset-1 tabs">
 
-              <div className="col-xs-2 col-xs-offset-1 tab" id="overview" onClick={() => this.handleSections('overview')}>
-                <div className="col-xs-12 icon">
+              <div className={ "col-xs-3 tab" + (this.state.overview ?" tab-active":"" )} id="overview" onClick={() => this.handleSections('overview')}>
+                <div className="col-xs-12 icon ">
                   <i className="fa fa-camera-retro fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Overview</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" id="jobs" onClick={() => this.handleSections('jobs')}>
+              <div className={"col-xs-3 tab"  + (this.state.jobTab ?" tab-active":"" )} id="jobs" onClick={() => this.handleSections('jobs')}>
                 <div className="col-xs-12 icon">
                   <i className="fa fa-suitcase fa-2x" />
                 </div>
@@ -469,7 +501,7 @@ class CompanyPage extends Component {
                   <p>Jobs</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" id="reviews" onClick={() => this.handleSections('reviews')}>
+              <div className={"col-xs-3  tab" + (this.state.reviews ?" tab-active":"" )} id="reviews" onClick={() => this.handleSections('reviews')}>
                 <div className="col-xs-12 icon">
                   <i className="fa fa-eye fa-2x" />
                 </div>
@@ -477,7 +509,7 @@ class CompanyPage extends Component {
                   <p>Reviews</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 tab" id="writereview" onClick={() => this.handleSections('writereview')}>
+              <div className={"col-xs-3 last-tab " + (this.state.writereview ?" tab-active":"" )} id="writereview" onClick={() => this.handleSections('writereview')}>
                 <div className="col-xs-12 icon">
                   <i className="fa fa-pencil-square-o fa-2x" />
                 </div>
@@ -485,14 +517,14 @@ class CompanyPage extends Component {
                   <p>Post a review</p>
                 </div>
               </div>
-              <div className="col-xs-2 col-md-2 last-tab tab" id="photos" onClick={() => this.handleSections('photos')}>
+              {/* <div className="col-xs-2 col-md-2 last-tab tab" id="photos" onClick={() => this.handleSections('photos')}>
                 <div className="col-xs-12 icon">
                   <i className="fa fa-pencil-square-o fa-2x" />
                 </div>
                 <div className="col-xs-12 tab-name hidden-xs">
                   <p>Photos</p>
                 </div>
-              </div>
+              </div> */}
 
             </div>
           </div>

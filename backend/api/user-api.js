@@ -34,15 +34,17 @@ module.exports = (app, upload) => {
   });
 
   /********Get one_user**********/
-  // app.get('/users/:username', (req, res) => {
-  //   const {username} = req.params;
-  //   // console.log(req.body);
-  //   User.find({username}).then((doc) => {
-  //     res.send(doc);
-  //   }).catch((err) => {
-  //     res.status(400).send(err);
-  //   })
-  // });
+  app.get('/users/:email', (req, res) => {
+    const {email} = req.params;
+    // console.log(req.body);
+    User.find({email}).then((doc) => {
+      if (doc.length) {
+        res.send(doc[0]);
+      }
+    }).catch((err) => {
+      res.status(400).send(err);
+    })
+  });
 
   /********Check login_user**********/
   app.post('/users', (req, res) => {
@@ -275,17 +277,49 @@ module.exports = (app, upload) => {
   //   })
 
   /********Update user_appliedjobstatus**********/
-  app.patch('/users/updateappliedjobstatus/:email', (req, res) => {
-    // console.log(req.body, req.params);
+  // app.get('/users/updatejobstatus', (req, res) => {
+  //   // console.log(req.body);
+    // let {jobID, status, email} = req.body;
+    // let newStatus = status === 'yes' ? 'Accepted' : 'Rejected';
+    // console.log(jobID, email, newStatus);
+    // User.update(
+    //   {'email': req.body.email,
+    //    'myjobs.jobID': jobID
+    //  }, {$set: {
+    //    'myjobs.$.status': newStatus
+    //  }},{new: true}).then((doc) => {
+    //    res.send(user)
+    //  }).catch((err) => {
+    //    res.status(400).send(err);
+    //  });
+  //   User.find().then((doc) => {
+  //     res.send(doc);
+  //   }).catch((err) => {
+  //     res.status(400).send(err);
+  //   })
+  // })
+  /********Update user_appliedjobstatus**********/
+  app.patch('/users/updatejobstatus', (req, res) => {
+    // console.log(req.body);
     let {jobID, status, email} = req.body;
     let newStatus = status === 'yes' ? 'Accepted' : 'Rejected';
-    // console.log(jobID, email, newStatus);
+
     User.update(
       {'email': req.body.email,
        'myjobs.jobID': jobID
      }, {$set: {
        'myjobs.$.status': newStatus
-     }});
+     }},{new: true}).then((doc) => {
+       res.send(user)
+     }).catch((err) => {
+       res.status(400).send(err);
+     });
+
+    // User.find({email: req.body.email}).then((doc) => {
+    //   res.send(doc);
+    // }).catch((err) => {
+    //   res.status(400).send(err);
+    // })
   })
 
 

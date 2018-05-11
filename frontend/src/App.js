@@ -7,6 +7,7 @@ import HomePage from './components/HomePage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import ProfilePage from './components/ProfilePage';
+import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import People from './components/People';
 import Inbox from './components/Inbox';
@@ -151,7 +152,7 @@ class App extends Component {
 
 
   render() {
-    var companyurl, profileurl;
+    var companyurl, profileurl, viewprofile;
     if (this.state.search) {
 
       companyurl = `/companies/${this.state.search}`;
@@ -165,6 +166,7 @@ class App extends Component {
     // console.log('Company URL', companyurl);
     // if (this.state.isLoggedIn) {
       profileurl = `/in/:profile`;
+      viewprofile = `/view/:profile`;
     // }
 
 
@@ -192,6 +194,7 @@ class App extends Component {
           <Route exact path="/login" render={(props) => <Login {...props} />} />
           <Route exact path={profileurl} render={(props) => <ProfilePage {...props} onSearch={this.handleSearch} />} />
           <Route exact path={profileurl + "/editprofile"} component={EditProfile} />
+          <Route exact path={viewprofile} component={Profile} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/jobs" component={JobsPage} />
           {/* <Route exact path="/jobs" render={(props) => <JobsPage {...props} onSearch={this.handleSearch} />} /> */}

@@ -184,7 +184,7 @@ export const updateAppliedJobStatus = (email, jobID, status) => {
 
   // console.log(data);
 
-  fetch(`${url}/users/updateappliedjobstatus/${email}`, {
+  fetch(`${url}/users/updatejobstatus`, {
     method: 'PATCH',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -278,6 +278,17 @@ export const addUser = (data) => {
   })
 }
 
+export const getOneUser = (email) => {
+  return fetch(`${url}/users/${email}`)
+  .then((res) => {
+      return res.json()
+  }).then((resJSON) => {
+    return resJSON;
+  }).catch((err) => {
+    return err;
+  });
+}
+
 export const getUser = (user) => {
   // console.log(user);
   return fetch(`${url}/users/login`, {
@@ -311,21 +322,57 @@ export const updateViews = (user) => {
   }).catch((err) => console.log(err));
 }
 
-export const sendMessage = (data, id) => {
-  // console.log(data, id);
+export const getMessages = (id) => {
+  return fetch(`${url}/messages/getmessages/${id}`)
+  .then((res) => {
+    return res.json();
+  }).then((resJSON) => {
+    return resJSON;
+  }).catch((err) => {
+    console.log(err);
+  })
+}
 
-  return fetch(`${url}/sendmessage/${id}`, {
+export const sendMessage = (data) => {
+  // console.log(data);
+  return fetch(`${url}/messages/sendMessage`, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
     body: JSON.stringify(data)
   }).then((res) => {
-    return res.status
+    return res.status;
   }).catch((err) => {
     console.log(err);
   })
 }
+
+export const updateIsRead = (id) => {
+  // console.log(id);
+  return fetch(`${url}/messages/updateread/${id}`)
+  .then((res) => {
+    return res.status;
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+
+// export const sendMessage = (data, id) => {
+//   // console.log(data, id);
+//
+//   return fetch(`${url}/sendmessage/${id}`, {
+//     method: 'POST',
+//     headers: new Headers({
+//       'Content-Type': 'application/json'
+//     }),
+//     body: JSON.stringify(data)
+//   }).then((res) => {
+//     return res.status;
+//   }).catch((err) => {
+//     console.log(err);
+//   })
+// }
 
 export const uploadImage = (image, id) => {
   // console.log(image);

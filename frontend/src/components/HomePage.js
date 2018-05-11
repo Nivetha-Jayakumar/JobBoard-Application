@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Particles from 'react-particles-js';
 import Navbar from './Navbar';
 
 class HomePage extends Component {
@@ -11,6 +12,10 @@ class HomePage extends Component {
       this.handleTabPage = this.handleTabPage.bind(this);
     }
 
+    // componentDidMount() {
+    //
+    // }
+
     handleTabPage(tab) {
       // console.log(tab);
       if (tab === 'join') {
@@ -21,6 +26,7 @@ class HomePage extends Component {
     }
 
     render() {
+      let bg = 'https://res.cloudinary.com/jobboard/image/upload/v1525989587/background.jpg';
         return (
           <div>
               <Navbar
@@ -31,6 +37,32 @@ class HomePage extends Component {
                   chooseTab={this.handleTabPage}/>
             <div id="home-page-content" className="text-center">
               <div id="home-page-header">
+                <Particles
+                  params={{
+                    particles: {
+                      number: {
+                        value: 200
+                      },
+                        line_linked: {
+                            enable: true,
+                            color: "#fff",
+                            width: 1
+                        }
+                    }
+                  }}
+                  style={{
+                    position: 'absolute',
+                    background: 'black',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: -1,
+                    backgroundImage: `url(${bg})`
+                  }}
+                />
+                {/* <canvas className="background" ></canvas> */}
+                <h1 id="website">JOBSEEK</h1>
                 <h1>The Easiest Way To Get Your New Job</h1>
                 <h5>Find Jobs, Employment & Career Opportunities</h5>
                 <br />

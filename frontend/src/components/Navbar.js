@@ -11,7 +11,12 @@ class Navbar extends Component {
       type: 'jobs',
       isLoggedIn: false,
       isEmployer: false,
-      redirect: ''
+      redirect: '',
+      profile: false,
+      dashboard: false,
+      jobs: false,
+      companies: false,
+      people: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +24,8 @@ class Navbar extends Component {
   }
 
   componentWillMount(){
-    // console.log('Navbar', this.props);
+    console.log('Navbar', this.props);
+    // console.log(this.props.location);
     this.setState({isLoggedIn: this.props.status, isEmployer: this.props.type});
   }
 
@@ -37,6 +43,47 @@ class Navbar extends Component {
 
   handleTabs(tab) {
     // console.log(tab);
+    if (tab === 'profile') {
+      this.setState({
+        profile: true,
+        dashboard: false,
+        jobs: false,
+        companies: false,
+        people: false
+      })
+    } else if (tab === 'dashboard') {
+      this.setState({
+        profile: false,
+        dashboard: true,
+        jobs: false,
+        companies: false,
+        people: false
+      })
+    } else if (tab === 'people') {
+      this.setState({
+        profile: false,
+        dashboard: false,
+        jobs: false,
+        companies: false,
+        people: true
+      })
+    } else if (tab === 'jobs') {
+      this.setState({
+        profile: false,
+        dashboard: false,
+        jobs: true,
+        companies: false,
+        people: false
+      })
+    } else if (tab === 'companies') {
+      this.setState({
+        profile: false,
+        dashboard: false,
+        jobs: false,
+        companies: true,
+        people: false
+      })
+    }
     this.props.chooseTab(tab);
   }
 
@@ -51,22 +98,25 @@ class Navbar extends Component {
 
   renderLogoutMenu(){
     return (
-      <nav className="navbar navbar-inverse">
+      <nav className="navbar navbar-fixed-top">
         <div className="container navbar-container">
           <div className="navbar-header">
-            <button className="btn navbar-toggle collapsed" data-toggle="collapse" data-target="#default-menu" aria-expanded="false">
+            <button className="btn navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbr-brand"><img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 70, height: 70}} /></a>
+            <a className="navbar-brand" onClick={() => <Redirect to="/" />}>
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 70, height: 70}} />
+            </a>
           </div>
 
-          <div className="collapse navbar-collapse" id="default-menu">
+          <div className="collapse navbar-collapse" id="menu">
             <ul className="nav navbar-nav navbar-right">
-              <li><a className="nav-tabs" onClick={() => this.handleTabs('join')}>Join</a></li>
-              <li><a className="nav-tabs" onClick={() => this.handleTabs('login')}>Login</a></li>
+              <li><a className="hvr-underline-from-center logout-links" onClick={() => this.handleTabs('join')}>Join</a></li>
+              <li>&nbsp;</li>
+              <li><a className="hvr-underline-from-center logout-links" onClick={() => this.handleTabs('login')}>Login</a></li>
             </ul>
           </div>
         </div>
@@ -76,32 +126,89 @@ class Navbar extends Component {
 
   renderJobSeekerLoginMenu() {
     return (
-      <nav>
-        <div>
-          <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
-          <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
-          <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
-          <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
-          <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
-          <a onClick={() => this.handleTabs('logout')}>Logout</a>&nbsp;
+      // <nav>
+      //   <div>
+      //     <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('logout')}>Logout</a>&nbsp;
+      //   </div>
+      // </nav>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className=" navbar-header">
+            <button className="btn navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className=" navbar-brand" onClick={() => this.setState({redirect: true})}>
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 40, height: 40}} />
+            </a>
+          </div>
+
+          <div className="collapse navbar-collapse" id="menu">
+            <ul className="nav navbar-nav">
+              <li><a className="pro-tab add" onClick={() => this.handleTabs('profile')}>Profile</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('dashboard')}>Dashboard</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('people')}>People</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('jobs')}>Jobs</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('companies')}>Companies</a></li>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              <li><a className="pro-tab add" onClick={() => this.handleTabs('logout')}>Logout</a></li>
+            </ul>
+          </div>
         </div>
-      </nav>
+    </nav>
     )
   }
 
   renderEmployerLoginMenu(){
     return (
-      <nav>
-        <div>
-          <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
-          <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
-          <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
-          <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
-          <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
-          <a onClick={() => this.handleTabs('postajob')}>Post a Job</a>&nbsp;
-          <a onClick={() => this.handleTabs('logout')}>Logout</a>&nbsp;
+      // <nav>
+      //   <div>
+      //     <a onClick={() => this.handleTabs('profile')}>Profile</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('dashboard')}>Dashboard</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('people')}>People</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('jobs')}>Jobs</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('companies')}>Companies</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('postajob')}>Post a Job</a>&nbsp;
+      //     <a onClick={() => this.handleTabs('logout')}>Logout</a>&nbsp;
+      //   </div>
+      // </nav>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className=" navbar-header">
+            <button className="btn navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className=" navbar-brand" onClick={() => this.setState({redirect: true})}>
+              <img src="https://res.cloudinary.com/jobboard/image/upload/v1525831839/logo.jpg" alt="JobSeek" style={{width: 40, height: 40}} />
+            </a>
+          </div>
+
+          <div className="collapse navbar-collapse" id="menu">
+            <ul className="nav navbar-nav">
+              <li><a className="pro-tab add" onClick={() => this.handleTabs('profile')}>Profile</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('dashboard')}>Dashboard</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('people')}>People</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('jobs')}>Jobs</a></li>
+              <li><a className="pro-tab add"  onClick={() => this.handleTabs('companies')}>Companies</a></li>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              <li><a className="pro-tab add" onClick={() => this.handleTabs('postajob')}><i className="fa fa-plus" /> Post a Job</a></li>
+              <li><a className="pro-tab add" onClick={() => this.handleTabs('logout')}>Logout</a></li>
+            </ul>
+          </div>
         </div>
-      </nav>
+    </nav>
 
     )
   }

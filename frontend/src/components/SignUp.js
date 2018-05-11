@@ -108,7 +108,7 @@ class SignUp extends Component {
             <div className="" id="signup-main">
               {/* <div> */}
                 {/*  */}
-                <div id="signup-container" className="col-xs-12" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525877372/signup-bg.jpg)`}}>
+                <div id="signup-container" className="col-xs-12" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525997162/join-back.jpg)`}}>
                   <br />
                   <div className="text-center col-md-4 col-md-offset-4">
                     {this.state.error ?

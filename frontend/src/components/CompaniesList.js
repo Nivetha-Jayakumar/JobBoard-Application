@@ -253,8 +253,7 @@ class CompaniesList extends Component{
     } else {
       return (
         <div>
-        <div className="container">
-          <div className="navbar">
+        <div className="container navbar">
             <Navbar
               onSearch={this.handleIt}
               status={this.state.isLoggedIn}
@@ -262,11 +261,12 @@ class CompaniesList extends Component{
               type={this.props.location.state.isEmployer}
               chooseTab={this.handleTabPage} />
           </div>
-        </div>
 
-          <div>&nbsp;</div>
-          <div className="text-center" id="company-search">
-            <h1>Over 100+ Fortune 500 companies use JobSeek.</h1>
+
+
+
+          <div className="text-center" id="company-search" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1526001316/companies.jpg)`}}>
+            <h1><span id="look">Look wh</span>at the companies are upto. Search one </h1>
             <br /><br />
             <div className="col-12 search">
                 <SearchBox onSearch={this.handleSearch}/>

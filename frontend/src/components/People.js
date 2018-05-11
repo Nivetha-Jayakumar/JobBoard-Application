@@ -31,7 +31,7 @@ class People extends Component {
     API.updateViews(user).then((response) => {
       if (response === 200) {
         this.props.history.push({
-          pathname: `/in/${profile}`,
+          pathname: `/view/${profile}`,
           state: {
             data: this.state,
             profile: user
@@ -121,8 +121,8 @@ class People extends Component {
       return <Redirect to='/' />
     } else {
       return (
-        <div className="container">
-          <div className="navbar">
+        <div>
+        <div className="container navbar">
             <Navbar
               onSearch={this.handleIt}
               status={this.state.isLoggedIn}
@@ -131,12 +131,11 @@ class People extends Component {
               chooseTab={this.handleTabPage} />
           </div>
 
-          <div className="text-center">
-            <h3>Over 50+ members are using JobSeek to get hired</h3>
-          </div>
 
-          <div className="people-search">
-            <div className="col-xs-12 input-group add-on">
+          <div id="people-main" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1526000595/people.jpg)`}}>
+            <h1 className="text-center">Meet · Greet · Connect </h1>
+            <br /><br /><br /><br />
+            <div className="col-xs-12 col-md-8 col-md-offset-2  input-group add-on">
                 <input
                   id="peoplesearch"
                   type="search"
@@ -146,7 +145,10 @@ class People extends Component {
                   onChange={this.handleSearch}
                 />
             </div>
+          </div>
 
+
+          <div className="people-search">
             <div className="col-xs-12 peoplelist-content">
               {this.state.people.length ? this.renderPeople() : null}
             </div>

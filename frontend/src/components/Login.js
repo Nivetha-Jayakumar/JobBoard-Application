@@ -72,7 +72,7 @@ class Login extends Component {
                     data={this.props.location.state}
                     chooseTab={this.handleTabPage}/>
 
-                <div id="login-container" className="col-xs-12" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525871899/login-bg.jpg)`}}>
+                <div id="login-container" className="col-xs-12" style={{backgroundImage: `url(https://res.cloudinary.com/jobboard/image/upload/v1525996473/back.jpg)`}}>
                   <br />
                   <div className="text-center col-md-4 col-md-offset-4">
                     {this.state.error ?
