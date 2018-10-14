@@ -94,8 +94,8 @@ class HomePage extends Component {
                     <div className="how-to-icon">
                       <i className="fa fa-th-list" />
                     </div>
-                      <h3>Search & Specify your job</h3>
-                      <p>Browse profiles, reviews, and proposals then interview top candidates.</p>
+                      <h3>Apply for job</h3>
+                      <p>Use our platform to apply, message and collaborate with the recruiters on the go.</p>
                   </div>
                 </div>
               </div>

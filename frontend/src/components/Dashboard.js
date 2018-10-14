@@ -141,7 +141,7 @@ class Dashboard extends Component {
             <h3>Inbox</h3>
             <hr />
             <h1 className="enlarge"><i className="fa fa-envelope-o" /></h1>
-            <h4>{this.props.location.state.messages.length} total messages</h4>
+            <h4>0 total messages</h4>
             {inbox === 0 ? null : <h4>{inbox} unread message(s)</h4>}
           </div>
 
