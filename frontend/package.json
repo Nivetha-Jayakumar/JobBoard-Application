@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.1.1",
     "jquery": "^3.3.1",
     "loadjs": "^3.5.4",
     "particlesjs": "^2.2.2",
