@@ -29,11 +29,11 @@ class CompanyPage extends Component {
     this.state.cons = '';
     this.state.benefits = '';
     this.state.setRating = 0;
-    this.state.overview = true,
-    this.state.jobTab = false,
-    this.state.reviews = false,
-    this.state.writereview = false,
-    this.state.photo = false,
+    this.state.overview = true;
+    this.state.jobTab = false;
+    this.state.reviews = false;
+    this.state.writereview = false;
+    this.state.photo = false;
 
     this.state.jobs = [];
 
